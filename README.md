@@ -1,6 +1,6 @@
 # DoorDash Wordle
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Inspiration! BTS Wordle spawned from this: https://github.com/cwackerfuss/react-wordle/tree/main/src
 
 ## Available Scripts
 
