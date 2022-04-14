@@ -11,6 +11,10 @@ const Wrapper = styled.div`
     background-color: ${theme.colors.doordashRed};
     display: flex;
     flex-direction: row;
+
+    @media (max-width: ${theme.sizes.mobile}) {
+        height: 4rem;
+    }
 `;
 
 const Logos = styled.div`
@@ -25,6 +29,10 @@ const Logos = styled.div`
         width: fit-content;
         margin-top: auto;
         margin-bottom: auto;
+    }
+
+    @media (max-width: ${theme.sizes.mobile}) {
+        display: none;
     }
 `;
 
@@ -78,16 +86,15 @@ const X = styled.div`
 const CenterText = styled.div`
     display: flex;
     flex-direction: row;
-    color: white;
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
     height: fit-content;
     width: fit-content;
     margin: auto 4rem auto 1rem;
 
     @media (max-width: ${theme.sizes.mobile}) {
-        font-size: 0.8rem;
-        margin: auto 0.2rem auto 0.2rem;
+        img {
+            height: 3rem;
+        }
+        margin: auto auto;
     }
 `;
 
