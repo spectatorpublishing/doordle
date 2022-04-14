@@ -10,6 +10,8 @@ function Keyboard() {
   const {
     board,
     disabledLetters,
+    correctLetters,
+    almostLetters,
     currAttempt,
     gameOver,
     onSelectLetter,
@@ -56,18 +58,18 @@ function Keyboard() {
     <div className="keyboard" onKeyDown={handleKeyboard}>
       <div className="line1">
         {keys1.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
+          return <Key keyVal={key} disabled={disabledLetters.includes(key)} correct={correctLetters.includes(key)} almost={almostLetters.includes(key)} />;
         })}
       </div>
       <div className="line2">
         {keys2.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
+          return <Key keyVal={key} disabled={disabledLetters.includes(key)} correct={correctLetters.includes(key)} almost={almostLetters.includes(key)} />;
         })}
       </div>
       <div className="line3">
         <Key keyVal={"ENTER"} bigKey />
         {keys3.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
+          return <Key keyVal={key} disabled={disabledLetters.includes(key)} correct={correctLetters.includes(key)} almost={almostLetters.includes(key)} />;
         })}
         <Key keyVal={"DELETE"} bigKey />
       </div>

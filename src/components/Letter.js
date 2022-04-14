@@ -30,7 +30,7 @@ const LetterWrapper = styled.div`
   }
   
   &.error {
-    background-color: #74A2A5;
+    background-color: ${theme.colors.mediumGreen};
     color: white;
     border: 0px;
   }
@@ -98,7 +98,7 @@ const checkLikely = (correctWord, guessedWord, letterPos) => {
 }
 
 function Letter({ letterPos, attemptVal }) {
-  const { board, setDisabledLetters, currAttempt, correctWord } =
+  const { board, setDisabledLetters, setCorrectLetters, setAlmostLetters, currAttempt, correctWord } =
     useContext(AppContext);
   const letter = board[attemptVal][letterPos];
   const correct = correctWord.toUpperCase()[letterPos] === letter;
@@ -117,6 +117,12 @@ function Letter({ letterPos, attemptVal }) {
   useEffect(() => {
     if (letter !== "" && !correct && !likely) {
       setDisabledLetters((prev) => [...prev, letter]);
+    }
+    else if (letter !== "" && correct) {
+      setCorrectLetters((prev) => [...prev, letter]);
+    }
+    else if (letter !== "" && almost) {
+      setAlmostLetters((prev) => [...prev, letter]);
     }
   }, [currAttempt.attempt]);
   return (
