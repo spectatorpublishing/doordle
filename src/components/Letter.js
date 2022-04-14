@@ -45,16 +45,36 @@ function Letter({ letterPos, attemptVal }) {
   const { board, setDisabledLetters, currAttempt, correctWord } =
     useContext(AppContext);
   const letter = board[attemptVal][letterPos];
+  const correctInstances = [...correctWord.toUpperCase()].filter((c) => (c === letter)).length;
+  const guessedInstances = board[attemptVal].filter((c) => (c === letter)).length;
+
   const correct = correctWord.toUpperCase()[letterPos] === letter;
+
   const almost =
-    !correct && letter !== "" && correctWord.toUpperCase().includes(letter);
+    // a letter has been typed and it is not correct but is in the correct word
+    !correct && letter !== "" && correctWord.toUpperCase().includes(letter)
+
+    // letter is in the guessed word only once at this (incorrect) position
+    && ( ( guessedInstances === 1 ) 
+    
+    // or letter is in the guessed word more than once, but only once in correct word
+    // --> highlight only first instance OR none if letter is also in correct position
+    || ( correctInstances === 1
+      && guessedInstances > 1
+      && !board[attemptVal].slice(0, letterPos).includes(letter) 
+      && board[attemptVal][correctWord.toUpperCase().indexOf(letter)] !== letter )
+
+    // or letter is in the guessed word AND correct word twice, but only one of the n positions is correct
+    || ( correctInstances > 1
+      && correctInstances === guessedInstances )
+    );
+
   const letterState =
     currAttempt.attempt > attemptVal &&
     (correct ? "correct" : almost ? "almost" : "error");
 
   useEffect(() => {
     if (letter !== "" && !correct && !almost) {
-      console.log(letter);
       setDisabledLetters((prev) => [...prev, letter]);
     }
   }, [currAttempt.attempt]);
