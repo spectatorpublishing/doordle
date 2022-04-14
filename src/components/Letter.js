@@ -30,7 +30,7 @@ const LetterWrapper = styled.div`
   }
   
   &.error {
-    background-color: #74A2A5;
+    background-color: ${theme.colors.mediumGreen};
     color: white;
     border: 0px;
   }
