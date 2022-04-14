@@ -23,7 +23,7 @@ const LetterWrapper = styled.div`
     border: 0px;
   }
   
-  &.almost {
+  &.likely {
     background-color: #EFC3C0;
     color: white;
     border: 0px;
@@ -52,17 +52,17 @@ const getIndices = (word_arr, character) => {
   return indices;
 }
 
-// check whether the letter should be colored as almost (pink) or incorrect
-const checkAlmost = (correctWord, guessedWord, letterPos) => {
+// check whether the letter should be colored as likely (pink) or incorrect
+const checkLikely = (correctWord, guessedWord, letterPos) => {
   const letter = guessedWord[letterPos];
   const correct = getIndices(correctWord, letter);
   const guess = getIndices(guessedWord, letter);
 
-  var isAlmost = true;
+  var isLikely = true;
 
   // if letter is guessed only once
   if (guess.length === 1) {
-    return isAlmost;
+    return isLikely;
   }
   
   // check if letter is guessed correctly in other positions
@@ -74,27 +74,27 @@ const checkAlmost = (correctWord, guessedWord, letterPos) => {
   }
 
   // if letter is already guessed in all correct positions:
-  // do not highlight this incorrect location as almost
+  // do not highlight this incorrect location as likely
   if (otherCorrect === correct.length) {
-    isAlmost = false;
-    return isAlmost;
+    isLikely = false;
+    return isLikely;
   }
 
-  // check if letter is already highlighted as almost in other positions
-  var alreadyAlmost = 0;
+  // check if letter is already highlighted as likely in other positions
+  var alreadyLikely = 0;
   for (let i = 0; i < guess.length; i++) {
     if (guess[i] < letterPos && !correct.includes(guess[i])) {
-      alreadyAlmost += 1;
+      alreadyLikely += 1;
     }
   }
 
-  // if letter is already highlighted as almost in other incorrect positions:
-  // only highlight if total letters highlighted (correct + almost) < number of times letter is present in correct word
-  if ( (alreadyAlmost + otherCorrect) >= correct.length) {
-    isAlmost = false;
+  // if letter is already highlighted as likely in other incorrect positions:
+  // only highlight if total letters highlighted (correct + likely) < number of times letter is present in correct word
+  if ( (alreadyLikely + otherCorrect) >= correct.length) {
+    isLikely = false;
   }
 
-  return isAlmost;
+  return isLikely;
 }
 
 function Letter({ letterPos, attemptVal }) {
@@ -103,19 +103,19 @@ function Letter({ letterPos, attemptVal }) {
   const letter = board[attemptVal][letterPos];
   const correct = correctWord.toUpperCase()[letterPos] === letter;
 
-  const almost =
+  const likely =
     // a letter has been typed and it is not correct but is present somewhere in the correct word
     (!correct && letter !== "" && correctWord.toUpperCase().includes(letter)
 
-    // check whether to highlight as almost
-    && checkAlmost([...correctWord.toUpperCase()], board[attemptVal], letterPos));
+    // check whether to highlight as likely
+    && checkLikely([...correctWord.toUpperCase()], board[attemptVal], letterPos));
 
   const letterState =
     currAttempt.attempt > attemptVal &&
-    (correct ? "correct" : almost ? "almost" : "error");
+    (correct ? "correct" : likely ? "likely" : "error");
 
   useEffect(() => {
-    if (letter !== "" && !correct && !almost) {
+    if (letter !== "" && !correct && !likely) {
       setDisabledLetters((prev) => [...prev, letter]);
     }
   }, [currAttempt.attempt]);
