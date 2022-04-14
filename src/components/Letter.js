@@ -121,7 +121,7 @@ function Letter({ letterPos, attemptVal }) {
     else if (letter !== "" && correct) {
       setCorrectLetters((prev) => [...prev, letter]);
     }
-    else if (letter !== "" && almost) {
+    else if (letter !== "" && likely) {
       setAlmostLetters((prev) => [...prev, letter]);
     }
   }, [currAttempt.attempt]);
