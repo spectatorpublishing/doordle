@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import { AppContext } from "../App";
 import Letter from "./Letter";
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const BoardW = styled.div`
-  height: 50vh;
-  width: 40vh;
+  height: 50rem;
+  width: fit-content;
   display: flex;
   flex-direction: column;
 
   @media only screen and (max-width: 768px) {
-    //height: 30vh;
+    height: 50vh;
+    width: 40vh;
   }
 `;
 

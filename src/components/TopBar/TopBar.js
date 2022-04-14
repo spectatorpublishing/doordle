@@ -89,6 +89,9 @@ const CenterText = styled.div`
     height: fit-content;
     width: fit-content;
     margin: auto 4rem auto 1rem;
+    img {
+        height: 3rem;
+    }
 
     @media (max-width: ${theme.sizes.mobile}) {
         img {
