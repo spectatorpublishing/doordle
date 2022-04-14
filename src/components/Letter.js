@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 import styled from 'styled-components'
 import theme from "../theme";
@@ -41,33 +41,86 @@ const LetterWrapper = styled.div`
   }
 `
 
+const getIndices = (word_arr, character) => {
+  var indices = [];
+  for (let i = 0; i < word_arr.length; i++) {
+    if (word_arr[i] === character) {
+      indices.push(i);
+    }
+  }
+  return indices;
+}
+
+// check whether the letter should be colored as almost (pink) or incorrect
+const checkAlmost = (correctWord, guessedWord, letterPos, letter) => {
+  console.log("checking: ", letter, letterPos);
+
+  const correct = getIndices([...correctWord.toUpperCase()], letter);
+  const guess = getIndices(guessedWord, letter);
+
+  var isAlmost = true;
+
+  // if letter is guessed only once
+  if (guess.length === 1) {
+    console.log("guessed only once");
+    return isAlmost;
+  }
+  
+  var otherCorrect = 0;
+  for (let i = 0; i < correct.length; i++) {
+    if (guess.includes(correct[i])) {
+      otherCorrect += 1;
+    }
+  }
+  console.log("other correct: ", otherCorrect);
+  console.log("total correct: ", correct.length);
+
+  if (otherCorrect === correct.length) {
+    isAlmost = false;
+    return isAlmost;
+  }
+
+  var alreadyAlmost = 0;
+  for (let i = 0; i < guess.length; i++) {
+    if (guess[i] < letterPos && !correct.includes(guess[i])) {
+      alreadyAlmost += 1;
+    }
+  }
+
+  if ( (alreadyAlmost + otherCorrect) >= correct.length) {
+    isAlmost = false;
+  }
+
+  console.log("already almost: ", alreadyAlmost);
+  console.log("taken: ", alreadyAlmost + otherCorrect);
+  console.log("is almost: ", isAlmost);
+
+  return isAlmost;
+}
+
 function Letter({ letterPos, attemptVal }) {
   const { board, setDisabledLetters, currAttempt, correctWord } =
     useContext(AppContext);
   const letter = board[attemptVal][letterPos];
-  const correctInstances = [...correctWord.toUpperCase()].filter((c) => (c === letter)).length;
-  const guessedInstances = board[attemptVal].filter((c) => (c === letter)).length;
+  // const correctInstances = [...correctWord.toUpperCase()].filter((c) => (c === letter)).length;
+  // const guessedInstances = board[attemptVal].filter((c) => (c === letter)).length;
+  // const isAlmost = checkAlmost(correctIndices, guessedIndices, letterPos, letter);
 
   const correct = correctWord.toUpperCase()[letterPos] === letter;
 
   const almost =
     // a letter has been typed and it is not correct but is in the correct word
-    !correct && letter !== "" && correctWord.toUpperCase().includes(letter)
+    (!correct && letter !== "" && correctWord.toUpperCase().includes(letter)
+    && checkAlmost(correctWord, board[attemptVal], letterPos, letter));
 
-    // letter is in the guessed word only once at this (incorrect) position
-    && ( ( guessedInstances === 1 ) 
-    
-    // or letter is in the guessed word more than once, but only once in correct word
-    // --> highlight only first instance OR none if letter is also in correct position
-    || ( correctInstances === 1
-      && guessedInstances > 1
-      && !board[attemptVal].slice(0, letterPos).includes(letter) 
-      && board[attemptVal][correctWord.toUpperCase().indexOf(letter)] !== letter )
+    // // the letter is guessed fewer times than it is present in the word
+    // && ( ( guessedIndices.length <= correctIndices.length )
 
-    // or letter is in the guessed word AND correct word twice, but only one of the n positions is correct
-    || ( correctInstances > 1
-      && correctInstances === guessedInstances )
-    );
+    // // or the letter is guessed more times than it is present in the word
+    // || ( guessedIndices.length > correctIndices.length
+    //   && board[attemptVal].slice(0, letterPos).filter((c) => (c === letter)).length < correctIndices.length
+    //   && board[attemptVal][correctWord.indexOf(letter)] !== letter )
+    // );
 
   const letterState =
     currAttempt.attempt > attemptVal &&
