@@ -1,11 +1,18 @@
 import "./App.css";
+import React, { useState, createContext, useEffect } from "react";
+import styled from 'styled-components';
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import { boardDefault, generateWordSet } from "./Words";
-import React, { useState, createContext, useEffect } from "react";
+
 import GameOver from "./components/GameOver";
+import TopBar from "./components/TopBar/TopBar";
 
 export const AppContext = createContext();
+
+const TopBarWrapper = styled.div`
+    display: flex;
+`;
 
 function App() {
   const [board, setBoard] = useState(boardDefault);
@@ -70,9 +77,9 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-        <h1>Wordle</h1>
-      </nav>
+      <TopBarWrapper>
+            <TopBar/>
+      </TopBarWrapper>
       <AppContext.Provider
         value={{
           board,
