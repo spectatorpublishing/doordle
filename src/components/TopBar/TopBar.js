@@ -112,6 +112,25 @@ const ShareButton = styled.div`
     }
 `;
 
+const Name = styled.h1`
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
+    color: white;
+    font-weight:800;
+    font-size:1.4rem;
+`
+
+const Tile = styled.span`
+    background-color:white;
+    padding:0.2rem 0.7rem;
+    margin:0.1rem;
+    border:black solid 0.1rem;
+    color:black;
+    font-size:1.25rem;
+    font-weight: 800;
+`
+
+
 const SBSTopBar = () => {
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const websiteURL = "https://doordash.columbiaspectator.com"
@@ -130,7 +149,7 @@ const SBSTopBar = () => {
                         <Logo><img src={companyLogo}/></Logo>
                     </a>
                 </Logos>
-                <CenterText><img src={gameLogo}/></CenterText>
+                <CenterText><Name>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name></CenterText>
                 <ShareButton>
                     <CDSShareButton canonical_url={websiteURL} headline={headline}/>
                 </ShareButton>

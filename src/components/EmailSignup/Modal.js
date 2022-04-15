@@ -18,8 +18,8 @@ const Name = styled.h1`
     @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
     font-family: 'Rubik', sans-serif;
     color:#B71000;
-    font-weight:600;
-    font-size:1.2rem;
+    font-weight:800;
+    font-size:1.4rem;
     @media (max-width: ${theme.sizes.mobile}) {
         font-size:0.8rem;
     }
@@ -27,13 +27,15 @@ const Name = styled.h1`
 
 const Tile = styled.span`
     background-color:white;
-    padding:0.25rem 0.75rem;
+    padding:0.2rem 0.7rem;
     margin:0.1rem;
     border:black solid 0.1rem;
     color:black;
-    font-size:1.2rem;
+    font-size:1.25rem;
+    font-weight: 800;
     @media (max-width: ${theme.sizes.mobile}) {
         font-size:0.8rem;
+        padding:0.2rem 0.5rem;
     }
     
 `
@@ -48,19 +50,22 @@ const WordTile = styled.span`
     font-size:1.5rem;
     @media (max-width: ${theme.sizes.mobile}) {
         font-size:0.9rem;
+        padding:0.3rem 0.5rem;
     }
  `
 const Background = styled.div`
     background-color:#E0F2F6;
-    padding:1.8rem 2rem 3.5rem 2rem;
     margin:auto;
-    margin-top:8rem; 
-    width:23rem;
+    padding:1.8rem 2rem 3.5rem 2rem;
+    margin-top:6rem; 
+    width:27rem;
+    border-radius: 10px;
     @media (max-width: ${theme.sizes.mobile}) {
         width:14rem;
         padding:1.5rem 2rem 3.5rem 2rem;
     }
 `
+
 const Result = styled.div`
     @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
     font-family: 'Rubik', sans-serif;
@@ -151,7 +156,7 @@ const Button = styled.button`
 const Footer = styled.div`
     background-color:#B71000;
     padding:0.5rem 2rem;
-    margin:auto;
+    margin-top: 2rem;
     width:23rem;
     @media (max-width: ${theme.sizes.mobile}) {
         width:14rem;
@@ -206,25 +211,32 @@ const CDSLogo = styled.div`
 const X = styled.div`   
     display:block;
     text-align:right;
-    color: ${theme.colors.black};
-    @media (max-width: ${theme.sizes.mobile}) {
-        margin-bottom:1.5rem;
-        opacity:0.7;
-    }
-    cursor:pointer;
-    &:hover{
-        opacity:0.5;
+    margin: auto 0rem;
+    color: ${theme.colors.white};
+    
+    &.close {
+        color: ${theme.colors.black};
+        @media (max-width: ${theme.sizes.mobile}) {
+            margin-bottom:1.5rem;
+            opacity:0.7;
+        }
+        cursor:pointer;
+        &:hover{
+            opacity:0.5;
+        }
+
     }
 `;
 
 
 const Modal = (props) => {
+    const gameLogo = "https://doordle.s3.amazonaws.com/logo.png"
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const companyURL = "https://www.doordash.com/"
   return(
     <div style={OVERLAY_STYLES}>
         <Background>
-            <X onClick= {()=>props.setOpenModal(false)}><FontAwesomeIcon icon={faX}/></X>
+            <X className="close" onClick= {()=>props.setOpenModal(false)}><FontAwesomeIcon icon={faX}/></X>
             <Name>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name>
             <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
@@ -235,7 +247,7 @@ const Modal = (props) => {
                 <WordTile>{letter.toUpperCase()}</WordTile>
             ))}
             <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
-            <Input alt="email"/>
+            <Input alt="email" type="email"/>
             <Button onClick= {()=>props.setOpenModal(false)}>Submit</Button>
         </Background>
         {/* <Footer>
@@ -248,8 +260,7 @@ const Modal = (props) => {
                         <Logo><img src={companyLogo}/></Logo>
                     </a>
                 </Logos>
-        </Footer> */}
-        
+            </Footer>*/}
     </div>
   )
 }
