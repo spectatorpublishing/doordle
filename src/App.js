@@ -108,7 +108,7 @@ function App() {
       >
         <div className="game">
           <Board />
-          {gameOver.gameOver ? <GameOver/> : <Keyboard />}
+          <Keyboard />
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord}/>}
         </div>
       </AppContext.Provider>
