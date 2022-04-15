@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import { boardDefault, generateWordSet } from "./Words";
-
+import Modal from "./components/EmailSignup/Modal.js"
 import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
 
@@ -26,6 +26,7 @@ function App() {
     gameOver: false,
     guessedWord: false,
   });
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -51,11 +52,13 @@ function App() {
 
     if (currWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
+      setOpenModal(true);
       return;
     }
 
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });
+      setOpenModal(true);
       return;
     }
   };
@@ -105,7 +108,8 @@ function App() {
       >
         <div className="game">
           <Board />
-          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+          <Keyboard />
+          {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord}/>}
         </div>
       </AppContext.Provider>
     </div>
