@@ -1,6 +1,46 @@
 import React, { useCallback, useEffect, useContext } from "react";
 import Key from "./Key";
 import { AppContext } from "../App";
+import styled from 'styled-components'
+import theme from "../theme";
+
+const KeyboardWrapper = styled.div`
+  
+  /*height: 50rem;
+  width: fit-content;*/
+  margin: 2rem 0rem 0rem 0rem; 
+  padding: 0rem;
+
+  @media only screen and (max-width: 768px) {
+    /*height: 50vh; 
+    width:  fit-content; */
+    margin: 5rem 0rem 0rem 0rem; 
+    padding: 0rem;
+
+  }
+`
+
+const Line1 = styled.div`
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+`
+
+const Line2 = styled.div`
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`
+
+const Line3 = styled.div`
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`
 
 function Keyboard() {
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
@@ -56,25 +96,25 @@ function Keyboard() {
 
   console.log(disabledLetters);
   return (
-    <div className="keyboard" onKeyDown={handleKeyboard}>
-      <div className="line1">
+    <KeyboardWrapper onKeyDown={handleKeyboard}>
+      <Line1>
         {keys1.map((key) => {
           return <Key keyVal={key} disabled={disabledLetters.includes(key)} correct={correctLetters.includes(key)} almost={almostLetters.includes(key)} />;
         })}
-      </div>
-      <div className="line2">
+      </Line1>
+      <Line2>
         {keys2.map((key) => {
           return <Key keyVal={key} disabled={disabledLetters.includes(key)} correct={correctLetters.includes(key)} almost={almostLetters.includes(key)} />;
         })}
-      </div>
-      <div className="line3">
+      </Line2>
+      <Line3>
         <Key keyVal={"ENTER"} bigKey />
         {keys3.map((key) => {
           return <Key keyVal={key} disabled={disabledLetters.includes(key)} correct={correctLetters.includes(key)} almost={almostLetters.includes(key)} />;
         })}
         <Key keyVal={"DELETE"} bigKey />
-      </div>
-    </div>
+      </Line3>
+    </KeyboardWrapper>
   );
 }
 
