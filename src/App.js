@@ -1,4 +1,5 @@
 import "./App.css";
+import Modal from "./components/EmailSignup/Modal.js"
 import React, { useState, createContext, useEffect } from "react";
 import styled from 'styled-components';
 import Board from "./components/Board";
@@ -26,6 +27,7 @@ function App() {
     gameOver: false,
     guessedWord: false,
   });
+  const [openModal, setOpenModal] = useState(true);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -106,6 +108,8 @@ function App() {
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
       </AppContext.Provider>
+      
+      {openModal && <Modal openModal = {setOpenModal}/>}
     </div>
   );
 }
