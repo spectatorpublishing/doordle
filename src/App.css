@@ -1,8 +1,8 @@
 .App {
   text-align: center;
   background-color: #ffffff;
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
   /* display: flex; */
   color: white;
 }
@@ -76,12 +76,14 @@ nav h1 {
   background-color: #869495;
 }
 
+/*
 .keyboard {
-  /* width: 700px;
-  height: 300px; */ 
+  width: 700px;
+  height: 300px; 
   margin-top: 2rem;
   margin-bottom: 0rem; 
 }
+
 
 .line1 {
   flex: 33%;
@@ -124,6 +126,7 @@ nav h1 {
 #disabled {
   background-color: #869495;
 }
+*/
 
 .App-header {
   background-color: #282c34;
