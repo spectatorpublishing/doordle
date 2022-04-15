@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import Modal from "../EmailSignup/Modal.js"
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -168,31 +169,18 @@ const X = styled.div`
 `;
 
 
-const Modal = (props) => {
+const ShareReedemPopup = (props) => {
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const companyURL = "https://www.doordash.com/"
-  return(
+  return (
     <div style={OVERLAY_STYLES}>
+
         <Background>
             <Name>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name>
-            <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
-            <Input alt="email"/>
-            <Button onClick= {()=>props.setOpenModal(false)}>Submit</Button>
+            <Button onClick= {props.setOpenModal(false)}>Submit</Button>
         </Background>
-        <Footer>
-            <Logos>
-                    <a href="https://www.columbiaspectator.com/">
-                        <CDSLogo><img src="https://doordle.s3.amazonaws.com/whitecrown.png"/></CDSLogo>
-                    </a>
-                    <X><FontAwesomeIcon icon={faX}/></X>
-                    <a href={companyURL}>
-                        <Logo><img src={companyLogo}/></Logo>
-                    </a>
-                </Logos>
-        </Footer>
-        
     </div>
   )
 }
-export default Modal;
 
+export default ShareReedemPopup

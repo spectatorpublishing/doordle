@@ -27,7 +27,7 @@ function App() {
     gameOver: false,
     guessedWord: false,
   });
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -110,8 +110,8 @@ function App() {
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
       </AppContext.Provider>
-      
-      {openModal && <Modal openModal = {setOpenModal}/>}
+      <button onClick= {()=>setOpenModal(true)}>ON GAME COMPLETE...</button>
+      {openModal && <Modal setOpenModal={setOpenModal}/>}
     </div>
   );
 }
