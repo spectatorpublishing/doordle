@@ -43,17 +43,19 @@ function App() {
     for (let i = 0; i < 5; i++) {
       currWord += board[currAttempt.attempt][i];
     }
+
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
     } else {
       alert("Word not found");
+      return;
     }
 
-    if (currWord === correctWord) {
+    if (currWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
-    console.log(currAttempt);
+
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });
       return;
