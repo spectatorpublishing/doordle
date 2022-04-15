@@ -37,22 +37,65 @@ const Tile = styled.span`
     }
     
 `
+
+const WordTile = styled.span`
+    background-color:#B71000;
+    padding:0.25rem 0.75rem;
+    margin:0.1rem;
+    border:none;
+    font-weight:600;
+    color:white;
+    font-size:1.5rem;
+    @media (max-width: ${theme.sizes.mobile}) {
+        font-size:0.9rem;
+    }
+ `
 const Background = styled.div`
     background-color:#E0F2F6;
-    padding:1.8rem 2rem 3rem 2rem;
+    padding:1.8rem 2rem 3.5rem 2rem;
     margin:auto;
-    margin-top:10rem;
+    margin-top:8rem; 
     width:23rem;
     @media (max-width: ${theme.sizes.mobile}) {
         width:14rem;
-        padding:1.8rem 2rem 2.5rem 2rem;
+        padding:1.5rem 2rem 3.5rem 2rem;
+    }
+`
+const Result = styled.div`
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
+    font-weight:600;
+    color: black;
+    text-align:center;
+    padding:0;
+    font-size:0.9rem;
+    padding-top:2.5rem;
+    padding-bottom:0rem;
+    @media (max-width: ${theme.sizes.mobile}) {
+        width:15rem;
+        font-size:0.7rem;
+    }
+`
+const TodaysWord = styled.p`
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
+    font-weight:600;
+    color: black;
+    text-align:center;
+    padding:0;
+    font-size:0.9rem;
+    padding-top:0rem;
+    padding-bottom:1rem;
+    @media (max-width: ${theme.sizes.mobile}) {
+        width:15rem;
+        font-size:0.6rem;
     }
 `
 
 const Instructions = styled.div`
     @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
     font-family: 'Rubik', sans-serif;
-    font-weight:500;
+    font-weight:600;
     color: black;
     text-align:center;
     padding-top:3rem;
@@ -60,11 +103,13 @@ const Instructions = styled.div`
     font-size:0.9rem;
     @media (max-width: ${theme.sizes.mobile}) {
         width:15rem;
-        font-size:0.6rem;
+        text-align:center;
+        font-size:0.65rem;
         padding-top:2rem;
         padding-bottom:1.2rem;
     }
 `
+
 const Input = styled.input`
     display:block;
     margin:auto;
@@ -84,22 +129,23 @@ const Input = styled.input`
 const Button = styled.button`
     @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
     font-family: 'Rubik', sans-serif;
-    font-weight:500;
+    font-weight:600;
     display:block;
     margin:auto;
-    background-color:#B71000;
+    background-color:#74A2A5;
     border-radius:5px;
     border:none;
     color:white;
     padding:0.8rem 1rem;
-    margin-top:2.5rem;
+    margin-top:1.5rem;
     @media (max-width: ${theme.sizes.mobile}) {
         margin-top:1.5rem;
-        padding:0.5rem 0.7rem;
-        font-size:0.6rem;
+        padding:0.8rem 0.7rem;
+        font-size:0.7rem;
     }
     &:hover{
         cursor:pointer;
+        opacity:0.85;
     }
 `
 const Footer = styled.div`
@@ -157,13 +203,17 @@ const CDSLogo = styled.div`
     }
 `;
 
-const X = styled.div`
-    height: fit-content;
-    width: fit-content;
-    margin: auto 0.3rem auto 0rem;
-    color: ${theme.colors.white};
+const X = styled.div`   
+    display:block;
+    text-align:right;
+    color: ${theme.colors.black};
     @media (max-width: ${theme.sizes.mobile}) {
-        margin: auto 0.05rem auto 0rem;
+        margin-bottom:1.5rem;
+        opacity:0.7;
+    }
+    cursor:pointer;
+    &:hover{
+        opacity:0.5;
     }
 `;
 
@@ -174,12 +224,21 @@ const Modal = (props) => {
   return(
     <div style={OVERLAY_STYLES}>
         <Background>
+            <X onClick= {()=>props.setOpenModal(false)}><FontAwesomeIcon icon={faX}/></X>
             <Name>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name>
+            <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
+            {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
+            </Result>
+            <TodaysWord>{props.guessedWord ?  null :  `TODAY'S DOORDLE:` }</TodaysWord>
+            {console.log(props.correctWord.split(""))}
+            {props.correctWord.split("").map((letter) => (
+                <WordTile>{letter.toUpperCase()}</WordTile>
+            ))}
             <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
             <Input alt="email"/>
             <Button onClick= {()=>props.setOpenModal(false)}>Submit</Button>
         </Background>
-        <Footer>
+        {/* <Footer>
             <Logos>
                     <a href="https://www.columbiaspectator.com/">
                         <CDSLogo><img src="https://doordle.s3.amazonaws.com/whitecrown.png"/></CDSLogo>
@@ -189,7 +248,7 @@ const Modal = (props) => {
                         <Logo><img src={companyLogo}/></Logo>
                     </a>
                 </Logos>
-        </Footer>
+        </Footer> */}
         
     </div>
   )
