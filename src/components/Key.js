@@ -1,5 +1,49 @@
 import React, { useContext } from "react";
 import { AppContext } from "../App";
+import styled from 'styled-components'
+import theme from "../theme";
+
+const KeyWrapper = styled.div`
+  width: 2.75rem;
+  height: 3.5rem;
+  margin: 0.2rem;
+  border-radius: 0.25rem;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #E0F2F6;
+  color: #000000;
+  font-family: 'Rubik', sans-serif;
+  cursor: pointer;
+
+  &.big {
+    width: 4.5rem;
+  }
+
+  &.correct {
+    background-color: ${theme.colors.doordashRed};
+  }
+  
+  &.almost {
+    background-color: ${theme.colors.salmon};
+  }
+  
+  &.disabled {
+    background-color: ${theme.colors.mediumGreen};
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 1.9rem;
+    height: 3.5rem;
+    margin: 0.15rem;
+    font-size: 0.75rem;
+
+    &.big {
+      width: 3.1rem;
+    }
+  }
+`
 
 function Key({ keyVal, bigKey, disabled, correct, almost }) {
   const { gameOver, onSelectLetter, onDelete, onEnter } =
@@ -16,13 +60,12 @@ function Key({ keyVal, bigKey, disabled, correct, almost }) {
     }
   };
   return (
-    <div
-      className="key"
-      id={bigKey ? "big" : correct ? "correct" : almost ? "almost" : disabled && "disabled"}
+    <KeyWrapper
+      className={bigKey ? "big" : correct ? "correct" : almost ? "almost" : disabled && "disabled"}
       onClick={selectLetter}
     >
       {keyVal}
-    </div>
+    </KeyWrapper>
   );
 }
 
