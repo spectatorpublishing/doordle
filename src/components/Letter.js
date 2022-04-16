@@ -53,7 +53,7 @@ const getIndices = (word_arr, character) => {
 }
 
 // check whether the letter should be colored as likely (pink) or incorrect
-const checkLikely = (correctWord, guessedWord, letterPos) => {
+export const checkLikely = (correctWord, guessedWord, letterPos) => {
   const letter = guessedWord[letterPos];
   const correct = getIndices(correctWord, letter);
   const guess = getIndices(guessedWord, letter);

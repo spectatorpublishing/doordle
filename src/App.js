@@ -16,6 +16,7 @@ const TopBarWrapper = styled.div`
 
 function App() {
   const [board, setBoard] = useState(boardDefault);
+  const [emojiBoard, setEmojiBoard] = useState("");
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letter: 0 });
   const [wordSet, setWordSet] = useState(new Set());
   const [correctWord, setCorrectWord] = useState("");
@@ -35,6 +36,31 @@ function App() {
     });
   }, []);
 
+  const updateEmojiBoard = (currWord) => {
+    var newEmojiBoard = emojiBoard
+    const word = currWord.toUpperCase().split("")
+    console.log(currWord)
+    console.log(word)
+    for (let j = 0; j < 5; j++){
+      const correct = correctWord.toUpperCase()[j] === word[j];
+
+      const likely = (!correct && correctWord.toUpperCase().includes(word[j]))
+        // a letter has been typed and it is not correct but is present somewhere in the correct word
+        
+      if (!correct && !likely){
+        newEmojiBoard = newEmojiBoard + "⬛️"
+      } else if (correct){
+        newEmojiBoard = newEmojiBoard + "🟩"
+      } else if (likely){
+        newEmojiBoard = newEmojiBoard + "🟨"
+      }
+    } 
+
+    newEmojiBoard = newEmojiBoard + "\n"
+
+    setEmojiBoard(newEmojiBoard)
+  }
+
   const onEnter = () => {
     if (currAttempt.letter !== 5) return;
 
@@ -45,8 +71,8 @@ function App() {
 
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
+      updateEmojiBoard(currWord);
     } else {
-      alert("Word not found");
       return;
     }
 
@@ -91,6 +117,8 @@ function App() {
         value={{
           board,
           setBoard,
+          emojiBoard,
+          setEmojiBoard,
           currAttempt,
           setCurrAttempt,
           correctWord,
@@ -109,7 +137,7 @@ function App() {
         <div className="game">
           <Board />
           <Keyboard />
-          {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord}/>}
+          {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
         </div>
       </AppContext.Provider>
     </div>
