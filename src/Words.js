@@ -2,13 +2,12 @@ import wordBank from "./wordle-bank-full.txt";
 import foodWordBank from "./wordle-bank-food.txt";
 
 export const boardDefault = [
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""]
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
 ];
 
 export const generateWordSet = async () => {
