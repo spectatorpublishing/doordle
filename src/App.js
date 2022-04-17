@@ -7,6 +7,7 @@ import { boardDefault, generateWordSet } from "./Words";
 import Modal from "./components/EmailSignup/Modal.js"
 import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
+import InstructionsPopup from "./components/InstructionsPopup/InstructionsPopup";
 
 export const AppContext = createContext();
 
@@ -28,6 +29,7 @@ function App() {
     guessedWord: false,
   });
   const [openModal, setOpenModal] = useState(false);
+  const [openInstructions, setOpenInstructions] = useState(true);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -137,6 +139,7 @@ function App() {
         <div className="game">
           <Board />
           <Keyboard />
+          {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
         </div>
       </AppContext.Provider>

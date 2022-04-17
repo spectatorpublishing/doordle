@@ -29,7 +29,7 @@ const WordTile = styled.span`
         font-size:0.9rem;
         padding:0.3rem 0.5rem;
     }
- `
+`
 const Background = styled.div`
     background-color:#E0F2F6;
     margin:auto;
