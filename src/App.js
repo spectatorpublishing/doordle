@@ -138,7 +138,6 @@ function App() {
           <Board />
           <Keyboard />
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
-          <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>
         </div>
       </AppContext.Provider>
     </div>
