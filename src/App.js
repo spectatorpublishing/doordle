@@ -41,7 +41,7 @@ function App() {
     const word = currWord.toUpperCase().split("")
     console.log(currWord)
     console.log(word)
-    for (let j = 0; j < 5; j++){
+    for (let j = 0; j < 6; j++){
       const correct = correctWord.toUpperCase()[j] === word[j];
 
       const likely = (!correct && correctWord.toUpperCase().includes(word[j]))
@@ -62,10 +62,10 @@ function App() {
   }
 
   const onEnter = () => {
-    if (currAttempt.letter !== 5) return;
+    if (currAttempt.letter !== 6) return;
 
     let currWord = "";
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       currWord += board[currAttempt.attempt][i];
     }
 
@@ -82,7 +82,7 @@ function App() {
       return;
     }
 
-    if (currAttempt.attempt === 5) {
+    if (currAttempt.attempt === 6) {
       setGameOver({ gameOver: true, guessedWord: false });
       setOpenModal(true);
       return;
@@ -98,7 +98,7 @@ function App() {
   };
 
   const onSelectLetter = (key) => {
-    if (currAttempt.letter > 4) return;
+    if (currAttempt.letter > 5) return;
     const newBoard = [...board];
     newBoard[currAttempt.attempt][currAttempt.letter] = key;
     setBoard(newBoard);
@@ -138,6 +138,7 @@ function App() {
           <Board />
           <Keyboard />
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
+          <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>
         </div>
       </AppContext.Provider>
     </div>

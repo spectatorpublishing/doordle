@@ -39,6 +39,7 @@ const Board = () => {
         <Letter letterPos={2} attemptVal={0} />
         <Letter letterPos={3} attemptVal={0} />
         <Letter letterPos={4} attemptVal={0} />
+        <Letter letterPos={5} attemptVal={0} />
       </Row>
       <Row>
         <Letter letterPos={0} attemptVal={1} />
@@ -46,6 +47,7 @@ const Board = () => {
         <Letter letterPos={2} attemptVal={1} />
         <Letter letterPos={3} attemptVal={1} />
         <Letter letterPos={4} attemptVal={1} />
+        <Letter letterPos={5} attemptVal={1} />
       </Row>
       <Row>
         <Letter letterPos={0} attemptVal={2} />
@@ -53,6 +55,7 @@ const Board = () => {
         <Letter letterPos={2} attemptVal={2} />
         <Letter letterPos={3} attemptVal={2} />
         <Letter letterPos={4} attemptVal={2} />
+        <Letter letterPos={5} attemptVal={2} />
       </Row>
       <Row>
         <Letter letterPos={0} attemptVal={3} />
@@ -60,6 +63,7 @@ const Board = () => {
         <Letter letterPos={2} attemptVal={3} />
         <Letter letterPos={3} attemptVal={3} />
         <Letter letterPos={4} attemptVal={3} />
+        <Letter letterPos={5} attemptVal={3} />
       </Row>
       <Row>
         <Letter letterPos={0} attemptVal={4} />
@@ -67,6 +71,7 @@ const Board = () => {
         <Letter letterPos={2} attemptVal={4} />
         <Letter letterPos={3} attemptVal={4} />
         <Letter letterPos={4} attemptVal={4} />
+        <Letter letterPos={5} attemptVal={4} />
       </Row>
       <Row>
         <Letter letterPos={0} attemptVal={5} />
@@ -74,6 +79,15 @@ const Board = () => {
         <Letter letterPos={2} attemptVal={5} />
         <Letter letterPos={3} attemptVal={5} />
         <Letter letterPos={4} attemptVal={5} />
+        <Letter letterPos={5} attemptVal={5} />
+      </Row>
+      <Row>
+        <Letter letterPos={0} attemptVal={6} />
+        <Letter letterPos={1} attemptVal={6} />
+        <Letter letterPos={2} attemptVal={6} />
+        <Letter letterPos={3} attemptVal={6} />
+        <Letter letterPos={4} attemptVal={6} />
+        <Letter letterPos={5} attemptVal={6} />
       </Row>
     </BoardWrapper>
     </BoardW>

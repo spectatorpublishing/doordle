@@ -2,12 +2,13 @@ import wordBank from "./wordle-bank-full.txt";
 import foodWordBank from "./wordle-bank-food.txt";
 
 export const boardDefault = [
-  ["", "", "", "", ""],
-  ["", "", "", "", ""],
-  ["", "", "", "", ""],
-  ["", "", "", "", ""],
-  ["", "", "", "", ""],
-  ["", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""]
 ];
 
 export const generateWordSet = async () => {
@@ -20,6 +21,6 @@ export const generateWordSet = async () => {
       todaysWord = wordArr[Math.floor(Math.random() * wordArr.length)];
       wordSet = new Set(wordArr);
     });
-    
+
   return { wordSet, todaysWord };
 };

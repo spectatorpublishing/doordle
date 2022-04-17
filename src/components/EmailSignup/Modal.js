@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare, faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
 import Countdown from '../Countdown';
 import { useState, useEffect } from 'react';
+import Logo from '../Logo';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -15,32 +16,6 @@ const OVERLAY_STYLES = {
   backgroundColor: 'rgba(0, 0, 0, .2)',
   zIndex: 1000
 }
-
-const Name = styled.h1`
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
-    font-family: 'Rubik', sans-serif;
-    color:#B71000;
-    font-weight:800;
-    font-size:1.4rem;
-    @media (max-width: ${theme.sizes.mobile}) {
-        font-size:0.8rem;
-    }
-`
-
-const Tile = styled.span`
-    background-color:white;
-    padding:0.2rem 0.7rem;
-    margin:0.1rem;
-    border:black solid 0.1rem;
-    color:black;
-    font-size:1.25rem;
-    font-weight: 800;
-    @media (max-width: ${theme.sizes.mobile}) {
-        font-size:0.8rem;
-        padding:0.2rem 0.5rem;
-    }
-    
-`
 
 const WordTile = styled.span`
     background-color:#B71000;
@@ -160,60 +135,6 @@ const Button = styled.button`
         margin: auto 0rem auto 0.5rem;
     }
 `
-const Footer = styled.div`
-    background-color:#B71000;
-    padding:0.5rem 2rem;
-    margin-top: 2rem;
-    width:23rem;
-    @media (max-width: ${theme.sizes.mobile}) {
-        width:14rem;
-        padding:0.5rem 2rem;
-    }
-    
-`
-
-const Logos = styled.div`
-    display: flex;
-    flex-direction: row;
-    height: fit-content;
-    width: fit-content;
-    margin:auto;
-
-    a {
-        height: fit-content;
-        width: fit-content;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
-`;
-
-const Logo = styled.div`
-    height: 2rem;
-    width: fit-content;
-    margin: auto 0.5rem auto 0.5rem;
-    img {
-        margin: auto 0rem auto 0rem;
-        width: auto;
-        height: 2rem;
-        @media (max-width: ${theme.sizes.mobile}) {
-            margin: 0.3rem 0rem auto 0rem;
-            height: 1.4rem;
-        }
-    }
-`;
-
-const CDSLogo = styled.div`
-    height: fit-content;
-    width: fit-content;
-    margin: auto 0.5rem auto 0.5rem;
-    img {
-        width: auto;
-        height: 2rem;
-        @media (max-width: ${theme.sizes.mobile}) {
-            height: 1.7rem;
-        }
-    }
-`;
 
 const X = styled.div`   
     display:block;
@@ -314,7 +235,7 @@ const Modal = (props) => {
     <div style={OVERLAY_STYLES}>
         <Background>
             <X className="close" onClick= {()=>props.setOpenModal(false)}><FontAwesomeIcon icon={faX}/></X>
-            <Name>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name>
+            <Logo fontColor={theme.colors.doordashRed}/>
             <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
@@ -338,17 +259,6 @@ const Modal = (props) => {
             <Input alt="email" type="email"/>
             <Button onClick= {()=>props.setOpenModal(false)}>Submit</Button>
         </Background>
-        {/* <Footer>
-            <Logos>
-                    <a href="https://www.columbiaspectator.com/">
-                        <CDSLogo><img src="https://doordle.s3.amazonaws.com/whitecrown.png"/></CDSLogo>
-                    </a>
-                    <X><FontAwesomeIcon icon={faX}/></X>
-                    <a href={companyURL}>
-                        <Logo><img src={companyLogo}/></Logo>
-                    </a>
-                </Logos>
-            </Footer>*/}
     </div>
   )
 }
