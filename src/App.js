@@ -43,7 +43,7 @@ function App() {
     const word = currWord.toUpperCase().split("")
     console.log(currWord)
     console.log(word)
-    for (let j = 0; j < 6; j++){
+    for (let j = 0; j <5; j++){
       const correct = correctWord.toUpperCase()[j] === word[j];
 
       const likely = (!correct && correctWord.toUpperCase().includes(word[j]))
@@ -64,10 +64,10 @@ function App() {
   }
 
   const onEnter = () => {
-    if (currAttempt.letter !== 6) return;
+    if (currAttempt.letter !== 5) return;
 
     let currWord = "";
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       currWord += board[currAttempt.attempt][i];
     }
 
@@ -84,7 +84,7 @@ function App() {
       return;
     }
 
-    if (currAttempt.attempt === 6) {
+    if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });
       setOpenModal(true);
       return;
