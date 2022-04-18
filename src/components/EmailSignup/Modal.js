@@ -252,8 +252,9 @@ const Modal = (props) => {
     const companyURL = "https://www.doordash.com/"
 
     const copyToClipboard = () => {
-        var guesses = props.emojiBoard.split("\n").length - 1
-        navigator.clipboard.writeText("Doordle (" + guesses.toString() + "/6) 😎\n" + props.emojiBoard)
+        var guesses = props.guessedWord ? props.emojiBoard.split("\n").length - 1 : "X"
+        var emoji = props.guessedWord ? "😎" : "😭"
+        navigator.clipboard.writeText("Doordle (" + guesses.toString() + "/6) " + emoji + "\n" + props.emojiBoard)
         .then(() => {
             console.log("Copied the text: \n" + props.emojiBoard);
             setShowCopied(true)
