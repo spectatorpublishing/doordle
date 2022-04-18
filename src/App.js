@@ -7,6 +7,7 @@ import { boardDefault, generateTimedWordSet, generateWordSet } from "./Words";
 import Modal from "./components/EmailSignup/Modal.js"
 import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
+import InstructionsPopup from "./components/InstructionsPopup/InstructionsPopup";
 
 export const AppContext = createContext();
 
@@ -28,6 +29,7 @@ function App() {
     guessedWord: false,
   });
   const [openModal, setOpenModal] = useState(false);
+  const [openInstructions, setOpenInstructions] = useState(true);
 
   useEffect(() => {
     // new word on each re-render
@@ -49,7 +51,7 @@ function App() {
     const word = currWord.toUpperCase().split("")
     console.log(currWord)
     console.log(word)
-    for (let j = 0; j < 5; j++){
+    for (let j = 0; j <5; j++){
       const correct = correctWord.toUpperCase()[j] === word[j];
 
       const likely = (!correct && correctWord.toUpperCase().includes(word[j]))
@@ -106,7 +108,7 @@ function App() {
   };
 
   const onSelectLetter = (key) => {
-    if (currAttempt.letter > 4) return;
+    if (currAttempt.letter > 5) return;
     const newBoard = [...board];
     newBoard[currAttempt.attempt][currAttempt.letter] = key;
     setBoard(newBoard);
@@ -145,6 +147,7 @@ function App() {
         <div className="game">
           <Board />
           <Keyboard />
+          {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
         </div>
       </AppContext.Provider>

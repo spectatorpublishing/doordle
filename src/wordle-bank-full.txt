@@ -698,7 +698,7 @@ facet
 faint
 fairy
 faith
-false
+FALSE
 fancy
 fanny
 farce
@@ -2313,3 +2313,18 @@ youth
 zebra
 zesty
 zonal
+anise
+aspic
+beans
+chips
+curds
+dates
+herbs
+mints
+mochi
+pilaf
+seeds
+spork
+spuds
+squid
+torte

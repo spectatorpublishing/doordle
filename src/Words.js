@@ -1,5 +1,6 @@
-import wordBank_guesses from "./wordle-bank-food-rand.txt";
-import wordBank_valid from "./wordle-bank.txt";
+import wordBank from "./wordle-bank-full.txt";
+import foodWordBank from "./wordle-bank-food.txt";
+import foodWordBankRand from "./wordle-bank-food-rand.txt";
 
 export const boardDefault = [
   ["", "", "", "", ""],
@@ -16,27 +17,28 @@ const LAUNCH_DATE = new Date("April 18, 2022 00:00:00");
 export const generateWordSet = async () => {
   let wordSet;
   let todaysWord;
-  await fetch(wordBank_valid)
+  await fetch(wordBank)
     .then((response) => response.text())
     .then((result) => {
       const wordArr = result.split("\n");
       todaysWord = wordArr[Math.floor(Math.random() * wordArr.length)];
       wordSet = new Set(wordArr);
     });
+
   return { wordSet, todaysWord };
 };
 
 export const generateTimedWordSet = async () => {
   let wordSet;
   let todaysWord;
-  await fetch(wordBank_valid)
+  await fetch(wordBank)
     .then((response) => response.text())
     .then((result) => {
       const validWordsArr = result.split("\n");
       wordSet = new Set(validWordsArr);
     });
   
-  await fetch(wordBank_guesses)
+  await fetch(foodWordBankRand)
     .then((response) => response.text())
     .then((result) => {
       const guessWordsArr = result.split("\n");

@@ -1,10 +1,11 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare, faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
 import Countdown from '../Countdown';
 import { useState, useEffect } from 'react';
+import Logo from '../Logo';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -15,32 +16,6 @@ const OVERLAY_STYLES = {
   backgroundColor: 'rgba(0, 0, 0, .2)',
   zIndex: 1000
 }
-
-const Name = styled.h1`
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
-    font-family: 'Rubik', sans-serif;
-    color:#B71000;
-    font-weight:800;
-    font-size:1.4rem;
-    @media (max-width: ${theme.sizes.mobile}) {
-        font-size:0.8rem;
-    }
-`
-
-const Tile = styled.span`
-    background-color:white;
-    padding:0.2rem 0.7rem;
-    margin:0.1rem;
-    border:black solid 0.1rem;
-    color:black;
-    font-size:1.25rem;
-    font-weight: 800;
-    @media (max-width: ${theme.sizes.mobile}) {
-        font-size:0.8rem;
-        padding:0.2rem 0.5rem;
-    }
-    
-`
 
 const WordTile = styled.span`
     background-color:#B71000;
@@ -54,17 +29,23 @@ const WordTile = styled.span`
         font-size:0.9rem;
         padding:0.3rem 0.5rem;
     }
- `
+`
 const Background = styled.div`
     background-color:#E0F2F6;
     margin:auto;
     padding:1.8rem 2rem 3.5rem 2rem;
-    margin-top:6rem; 
+    margin-top:3rem; 
     width:27rem;
     border-radius: 10px;
+
+    @media (max-width: ${theme.sizes.tablet}) {
+        width: 16rem;
+        padding:1.5rem 2rem 1.5rem 2rem;
+    }
+
     @media (max-width: ${theme.sizes.mobile}) {
-        width:14rem;
-        padding:1.5rem 2rem 3.5rem 2rem;
+        width: 75vw;
+        padding:1.5rem 2rem 2.5rem 2rem;
     }
 `
 
@@ -79,8 +60,10 @@ const Result = styled.div`
     padding-top:2.5rem;
     padding-bottom:0rem;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
+        width:fit-content;
+        margin: 0rem auto;
         font-size:0.7rem;
+        padding-top:1.5rem;
     }
 `
 const TodaysWord = styled.p`
@@ -93,9 +76,11 @@ const TodaysWord = styled.p`
     padding:0;
     padding-top:0rem;
     padding-bottom:1rem;
+
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
-        font-size:0.6rem;
+        width:fit-content;
+        margin: 0.5rem auto;
+        font-size:0.7rem;
     }
 `
 
@@ -109,11 +94,11 @@ const Instructions = styled.div`
     padding-top:3rem;
     padding-bottom:1rem;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
-        text-align:center;
-        font-size:0.65rem;
-        padding-top:2rem;
-        padding-bottom:1.2rem;
+        width:fit-content;
+        margin: 0.5rem auto;
+        font-size:0.7rem;
+        padding-top:1rem;
+        padding-bottom:1rem;
     }
 `
 
@@ -126,7 +111,7 @@ const Input = styled.input`
     border:black solid 1.2px;
     border-radius:5px;
     @media (max-width: ${theme.sizes.mobile}) {
-        width: 9rem;
+        width: 70%;
         height: 1rem;
         padding:0.2rem;
     }
@@ -148,8 +133,8 @@ const Button = styled.button`
     //margin-top:1.5rem;
     @media (max-width: ${theme.sizes.mobile}) {
         margin-top:1.5rem;
-        padding:0.8rem 0.7rem;
-        font-size:0.7rem;
+        padding:0.6rem 0.7rem;
+        font-size:0.8rem;
     }
     &:hover{
         cursor:pointer;
@@ -160,60 +145,6 @@ const Button = styled.button`
         margin: auto 0rem auto 0.5rem;
     }
 `
-const Footer = styled.div`
-    background-color:#B71000;
-    padding:0.5rem 2rem;
-    margin-top: 2rem;
-    width:23rem;
-    @media (max-width: ${theme.sizes.mobile}) {
-        width:14rem;
-        padding:0.5rem 2rem;
-    }
-    
-`
-
-const Logos = styled.div`
-    display: flex;
-    flex-direction: row;
-    height: fit-content;
-    width: fit-content;
-    margin:auto;
-
-    a {
-        height: fit-content;
-        width: fit-content;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
-`;
-
-const Logo = styled.div`
-    height: 2rem;
-    width: fit-content;
-    margin: auto 0.5rem auto 0.5rem;
-    img {
-        margin: auto 0rem auto 0rem;
-        width: auto;
-        height: 2rem;
-        @media (max-width: ${theme.sizes.mobile}) {
-            margin: 0.3rem 0rem auto 0rem;
-            height: 1.4rem;
-        }
-    }
-`;
-
-const CDSLogo = styled.div`
-    height: fit-content;
-    width: fit-content;
-    margin: auto 0.5rem auto 0.5rem;
-    img {
-        width: auto;
-        height: 2rem;
-        @media (max-width: ${theme.sizes.mobile}) {
-            height: 1.7rem;
-        }
-    }
-`;
 
 const X = styled.div`   
     display:block;
@@ -237,11 +168,18 @@ const X = styled.div`
 
 const TodaysWordTiles = styled.div`
     margin-bottom: 3rem;
+    @media (max-width: ${theme.sizes.mobile}) {
+        margin-bottom: 0rem;
+    }
 `;
 
 const Row = styled.div`
     display: flex;
     flex-direction: row;
+
+    @media (max-width: ${theme.sizes.mobile}) {
+        flex-direction: column;
+    }
 `;
 
 const Time = styled.div`
@@ -249,7 +187,7 @@ const Time = styled.div`
 
 const TimerWrap = styled.div`
     padding: 0rem 2rem;
-    margin:auto 1rem;
+    margin:auto 1rem;    
 `;
 
 const TimerText = styled.div`
@@ -260,13 +198,19 @@ const TimerText = styled.div`
     color: black;
     text-align:center;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
         font-size:0.7rem;
+        margin: 0rem auto;
+        width: fit-content;
     }
 `;
 
 const VerticalLine = styled.div`
     border-right: 2px solid black;
+`;
+
+const HorizontalLine = styled.div`
+    border-bottom: 2px solid black;
+    margin: 1rem;
 `;
 
 const CopiedText = styled.div`
@@ -278,11 +222,26 @@ color: ${theme.colors.doordashRed};
 text-align:center;
 margin-top: 1rem;
 @media (max-width: ${theme.sizes.mobile}) {
-    width:15rem;
-    font-size:0.7rem;
+    margin: 1rem auto 0rem auto;
+    width: fit-content;
+    font-size: 0.7rem;
 }
 
 `;
+
+const Mobile = styled.div`
+    display: none;
+    @media (max-width: ${theme.sizes.mobile}) {
+        display: block;
+    }
+`;
+
+const Desktop = styled.div`
+@media (max-width: ${theme.sizes.mobile}) {
+    display: none;
+}
+
+`
 
 
 
@@ -314,7 +273,7 @@ const Modal = (props) => {
     <div style={OVERLAY_STYLES}>
         <Background>
             <X className="close" onClick= {()=>props.setOpenModal(false)}><FontAwesomeIcon icon={faX}/></X>
-            <Name>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name>
+            <Logo fontColor={theme.colors.doordashRed}/>
             <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
@@ -325,30 +284,30 @@ const Modal = (props) => {
                     <WordTile>{letter.toUpperCase()}</WordTile>
                 ))}
             </TodaysWordTiles>
-            <Row>
-                <TimerWrap>
-                    <TimerText>NEXT DOORDLE</TimerText>
-                    <Time><Countdown/></Time>
-                </TimerWrap>
-                <VerticalLine/>
-                <Button onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
-            </Row>
-            {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                <Desktop>
+                <Row>
+                    <TimerWrap>
+                        <TimerText>NEXT DOORDLE</TimerText>
+                        <Time><Countdown/></Time>
+                    </TimerWrap>
+                    <VerticalLine/>
+                    <Button onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
+                </Row>
+                {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                </Desktop>
+                <Mobile>
+                    <Button className='mobile' onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
+                    {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                    <HorizontalLine/>
+                    <TimerWrap className="mobile">
+                        <TimerText>NEXT DOORDLE</TimerText>
+                        <Time><Countdown/></Time>
+                    </TimerWrap>
+                </Mobile>
             <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
             <Input alt="email" type="email"/>
             <Button onClick= {()=>props.setOpenModal(false)}>Submit</Button>
         </Background>
-        {/* <Footer>
-            <Logos>
-                    <a href="https://www.columbiaspectator.com/">
-                        <CDSLogo><img src="https://doordle.s3.amazonaws.com/whitecrown.png"/></CDSLogo>
-                    </a>
-                    <X><FontAwesomeIcon icon={faX}/></X>
-                    <a href={companyURL}>
-                        <Logo><img src={companyLogo}/></Logo>
-                    </a>
-                </Logos>
-            </Footer>*/}
     </div>
   )
 }

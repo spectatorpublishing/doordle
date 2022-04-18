@@ -4,6 +4,7 @@ import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleQuestion, faX, faXmark } from '@fortawesome/free-solid-svg-icons';
 import CDSShareButton from './CDSShareButton';
+import Logo from '../Logo';
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -36,7 +37,7 @@ const Logos = styled.div`
     }
 `;
 
-const Logo = styled.div`
+const CompanyLogo = styled.div`
     height: 2rem;
     width: fit-content;
     margin: auto 0.5rem auto 0.5rem;
@@ -83,21 +84,11 @@ const X = styled.div`
     }
 `;
 
-const CenterText = styled.div`
-    display: flex;
-    flex-direction: row;
-    height: fit-content;
-    width: fit-content;
+const LogoWrapper = styled.div`
     margin: auto 4rem auto 1rem;
-    img {
-        height: 3rem;
-    }
-
+    
     @media (max-width: ${theme.sizes.mobile}) {
-        img {
-            height: 3rem;
-        }
-        margin: auto auto;
+        margin: auto auto auto auto;
     }
 `;
 
@@ -112,26 +103,8 @@ const ShareButton = styled.div`
     }
 `;
 
-const Name = styled.h1`
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
-    font-family: 'Rubik', sans-serif;
-    color: white;
-    font-weight:800;
-    font-size:1.4rem;
-`
 
-const Tile = styled.span`
-    background-color:white;
-    padding:0.2rem 0.7rem;
-    margin:0.1rem;
-    border:black solid 0.1rem;
-    color:black;
-    font-size:1.25rem;
-    font-weight: 800;
-`
-
-
-const SBSTopBar = () => {
+const TopBar = () => {
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const websiteURL = "https://doordash.columbiaspectator.com"
     const companyURL = "https://www.doordash.com/"
@@ -146,10 +119,10 @@ const SBSTopBar = () => {
                     </a>
                     <X><FontAwesomeIcon icon={faX}/></X>
                     <a href={companyURL}>
-                        <Logo><img src={companyLogo}/></Logo>
+                        <CompanyLogo><img src={companyLogo}/></CompanyLogo>
                     </a>
                 </Logos>
-                <CenterText><Name>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name></CenterText>
+                <LogoWrapper><Logo fontColor="white"/></LogoWrapper>
                 <ShareButton>
                     <CDSShareButton canonical_url={websiteURL} headline={headline}/>
                 </ShareButton>
@@ -158,4 +131,4 @@ const SBSTopBar = () => {
     
 };
 
-export default SBSTopBar;
+export default TopBar;
