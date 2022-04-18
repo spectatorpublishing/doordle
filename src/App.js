@@ -3,7 +3,7 @@ import React, { useState, createContext, useEffect } from "react";
 import styled from 'styled-components';
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
-import { boardDefault, generateWordSet } from "./Words";
+import { boardDefault, generateTimedWordSet, generateWordSet } from "./Words";
 import Modal from "./components/EmailSignup/Modal.js"
 import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
@@ -30,10 +30,18 @@ function App() {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    generateWordSet().then((words) => {
+    // new word on each re-render
+    // generateWordSet().then((words) => {
+    //   setWordSet(words.wordSet);
+    //   setCorrectWord(words.todaysWord);
+    // });
+
+    // new word each 12 hours
+    generateTimedWordSet().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
-    });
+      console.log("chosen word: ", words.todaysWord);
+    })
   }, []);
 
   const updateEmojiBoard = (currWord) => {
