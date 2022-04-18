@@ -43,7 +43,7 @@ const Countdown = () => {
       );
   } else {
     timerComponents.push(
-        <span>{"00"}</span>
+        <span>{"00:"}</span>
     );
   }
 
@@ -55,7 +55,7 @@ const Countdown = () => {
       );
   } else {
     timerComponents.push(
-        <span>{"00"}</span>
+        <span>{"00:"}</span>
     );
   }
 
