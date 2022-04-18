@@ -16,7 +16,8 @@ const BoardW = styled.div`
 `;
 
 const BoardWrapper = styled.div`
-  height: 100%;
+  margin-top: 1rem;
+  height: 60%;
   display: flex;
   flex-direction: column;
 `;

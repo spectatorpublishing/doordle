@@ -5,6 +5,7 @@ import theme from "../theme";
 
 const LetterWrapper = styled.div`
   flex: 1;
+  height: 3rem;
   min-height: 3rem;
   min-width: 3rem;
   border: 1px solid grey;
