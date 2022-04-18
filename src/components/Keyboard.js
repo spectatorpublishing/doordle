@@ -8,12 +8,13 @@ const KeyboardWrapper = styled.div`
   
   /*height: 50rem;
   width: fit-content;*/
-  margin: 2rem 0rem 0rem 0rem; 
+  margin: 2rem 0rem 1rem 0rem; 
   padding: 0rem;
 
   @media only screen and (max-width: 768px) {
     /*height: 50vh; 
     width:  fit-content; */
+    width: 90%;
     margin: 2rem 0rem 0rem 0rem; 
     padding: 0rem;
 
