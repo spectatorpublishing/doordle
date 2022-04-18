@@ -35,8 +35,65 @@ function App() {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
+      console.log(words.todaysWord);
     });
   }, []);
+
+  // find indices of a given character in an array of characters
+  const getIndices = (word_arr, character) => {
+    var indices = [];
+    for (let i = 0; i < word_arr.length; i++) {
+      if (word_arr[i] === character) {
+        indices.push(i);
+      }
+    }
+    return indices;
+  }
+
+  // check whether the letter should be colored as likely or incorrect
+  const checkLikely = (correctWord, guessedWord, letterPos) => {
+    const letter = guessedWord[letterPos];
+    const correct = getIndices(correctWord, letter);
+    const guess = getIndices(guessedWord, letter);
+
+    var isLikely = true;
+
+    // if letter is guessed only once
+    if (guess.length === 1) {
+      return isLikely;
+    }
+    
+    // check if letter is guessed correctly in other positions
+    var otherCorrect = 0;
+    for (let i = 0; i < correct.length; i++) {
+      if (guess.includes(correct[i])) {
+        otherCorrect += 1;
+      }
+    }
+
+    // if letter is already guessed in all correct positions:
+    // do not highlight this incorrect location as likely
+    if (otherCorrect === correct.length) {
+      isLikely = false;
+      return isLikely;
+    }
+
+    // check if letter is already highlighted as likely in other positions
+    var alreadyLikely = 0;
+    for (let i = 0; i < guess.length; i++) {
+      if (guess[i] < letterPos && !correct.includes(guess[i])) {
+        alreadyLikely += 1;
+      }
+    }
+
+    // if letter is already highlighted as likely in other incorrect positions:
+    // only highlight if total letters highlighted (correct + likely) < number of times letter is present in correct word
+    if ( (alreadyLikely + otherCorrect) >= correct.length) {
+      isLikely = false;
+    }
+
+    return isLikely;
+  }
 
   const updateEmojiBoard = (currWord) => {
     var newEmojiBoard = emojiBoard
@@ -46,8 +103,9 @@ function App() {
     for (let j = 0; j <5; j++){
       const correct = correctWord.toUpperCase()[j] === word[j];
 
-      const likely = (!correct && correctWord.toUpperCase().includes(word[j]))
-        // a letter has been typed and it is not correct but is present somewhere in the correct word
+      // a letter has been typed and it is not correct but is present somewhere in the correct word
+      const likely = (!correct && correctWord.toUpperCase().includes(word[j])
+      && checkLikely([...correctWord.toUpperCase()], word, j))
         
       if (!correct && !likely){
         newEmojiBoard = newEmojiBoard + "⬛️"
@@ -134,6 +192,8 @@ function App() {
           setAlmostLetters,
           almostLetters,
           gameOver,
+          getIndices,
+          checkLikely
         }}
       >
         <div className="game">
