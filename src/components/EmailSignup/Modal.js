@@ -253,7 +253,8 @@ const Modal = (props) => {
 
     const copyToClipboard = () => {
         var guesses = props.guessedWord ? props.emojiBoard.split("\n").length - 1 : "X"
-        navigator.clipboard.writeText("Doordle (" + guesses.toString() + "/6) 😎\n" + props.emojiBoard)
+        var emoji = props.guessedWord ? "😎" : "😭"
+        navigator.clipboard.writeText("Doordle (" + guesses.toString() + "/6) " + emoji + "\n" + props.emojiBoard)
         .then(() => {
             console.log("Copied the text: \n" + props.emojiBoard);
             setShowCopied(true)
