@@ -8,16 +8,17 @@ const Timer = styled.div`
 
 const Countdown = () => {
   const calculateTimeLeft = () => {
-    const differenceNoon = +new Date("Jan 01, 2025 23:00:00") - +new Date();
-    const differenceMidnight = +new Date("Jan 01, 2025 11:00:00") - +new Date();
+    const differenceNoon = new Date("Jan 01, 2025 23:00:00").getTime() - new Date().getTime();
+    const differenceMidnight = new Date("Jan 01, 2025 11:00:00").getTime() - new Date().getTime();
+    
     const difference = Math.min(differenceMidnight, differenceNoon);
     let timeLeft = {};
 
     if (difference > 0) {
       timeLeft = {
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
+        hours: Math.min(Math.floor((differenceNoon % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),Math.floor((differenceMidnight % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((difference % (1000 * 60)) / 1000)
       };
     }
 

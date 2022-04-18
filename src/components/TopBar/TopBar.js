@@ -86,6 +86,10 @@ const X = styled.div`
 
 const LogoWrapper = styled.div`
     margin: auto 4rem auto 1rem;
+    
+    @media (max-width: ${theme.sizes.mobile}) {
+        margin: auto auto auto auto;
+    }
 `;
 
 const ShareButton = styled.div`
@@ -100,7 +104,7 @@ const ShareButton = styled.div`
 `;
 
 
-const SBSTopBar = () => {
+const TopBar = () => {
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const websiteURL = "https://doordash.columbiaspectator.com"
     const companyURL = "https://www.doordash.com/"
@@ -127,4 +131,4 @@ const SBSTopBar = () => {
     
 };
 
-export default SBSTopBar;
+export default TopBar;

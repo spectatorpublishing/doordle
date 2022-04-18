@@ -45,10 +45,6 @@ const Logo = ({fontColor}) => {
     return (
         <div>
             <CenterText><Name color={fontColor}>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name></CenterText>
-            {/*  <CenterText><Name color={fontColor}>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile></Name></CenterText> */}
-            {/*  <CenterText><Name color={fontColor}><Tile>D</Tile><Tile>O</Tile><Tile>O</Tile><Tile>R</Tile><Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name></CenterText> */}
-            {/*  <CenterText><Name color={fontColor}>DOORDLE <Tile>D</Tile><Tile>A</Tile><Tile>S</Tile><Tile>H</Tile></Name></CenterText> */}
-            {/*  <CenterText><Name color={fontColor}><Tile>D</Tile><Tile>O</Tile><Tile>O</Tile><Tile>R</Tile><Tile>D</Tile><Tile>L</Tile><Tile>E</Tile></Name></CenterText> */}
         </div>
     );
 };

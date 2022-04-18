@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShare, faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
@@ -29,17 +29,23 @@ const WordTile = styled.span`
         font-size:0.9rem;
         padding:0.3rem 0.5rem;
     }
- `
+`
 const Background = styled.div`
     background-color:#E0F2F6;
     margin:auto;
     padding:1.8rem 2rem 3.5rem 2rem;
-    margin-top:6rem; 
+    margin-top:3rem; 
     width:27rem;
     border-radius: 10px;
+
+    @media (max-width: ${theme.sizes.tablet}) {
+        width: 16rem;
+        padding:1.5rem 2rem 1.5rem 2rem;
+    }
+
     @media (max-width: ${theme.sizes.mobile}) {
-        width:14rem;
-        padding:1.5rem 2rem 3.5rem 2rem;
+        width: 75vw;
+        padding:1.5rem 2rem 2.5rem 2rem;
     }
 `
 
@@ -54,8 +60,10 @@ const Result = styled.div`
     padding-top:2.5rem;
     padding-bottom:0rem;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
+        width:fit-content;
+        margin: 0rem auto;
         font-size:0.7rem;
+        padding-top:1.5rem;
     }
 `
 const TodaysWord = styled.p`
@@ -68,9 +76,11 @@ const TodaysWord = styled.p`
     padding:0;
     padding-top:0rem;
     padding-bottom:1rem;
+
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
-        font-size:0.6rem;
+        width:fit-content;
+        margin: 0.5rem auto;
+        font-size:0.7rem;
     }
 `
 
@@ -84,11 +94,11 @@ const Instructions = styled.div`
     padding-top:3rem;
     padding-bottom:1rem;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
-        text-align:center;
-        font-size:0.65rem;
-        padding-top:2rem;
-        padding-bottom:1.2rem;
+        width:fit-content;
+        margin: 0.5rem auto;
+        font-size:0.7rem;
+        padding-top:1rem;
+        padding-bottom:1rem;
     }
 `
 
@@ -101,7 +111,7 @@ const Input = styled.input`
     border:black solid 1.2px;
     border-radius:5px;
     @media (max-width: ${theme.sizes.mobile}) {
-        width: 9rem;
+        width: 70%;
         height: 1rem;
         padding:0.2rem;
     }
@@ -123,8 +133,8 @@ const Button = styled.button`
     //margin-top:1.5rem;
     @media (max-width: ${theme.sizes.mobile}) {
         margin-top:1.5rem;
-        padding:0.8rem 0.7rem;
-        font-size:0.7rem;
+        padding:0.6rem 0.7rem;
+        font-size:0.8rem;
     }
     &:hover{
         cursor:pointer;
@@ -158,11 +168,18 @@ const X = styled.div`
 
 const TodaysWordTiles = styled.div`
     margin-bottom: 3rem;
+    @media (max-width: ${theme.sizes.mobile}) {
+        margin-bottom: 0rem;
+    }
 `;
 
 const Row = styled.div`
     display: flex;
     flex-direction: row;
+
+    @media (max-width: ${theme.sizes.mobile}) {
+        flex-direction: column;
+    }
 `;
 
 const Time = styled.div`
@@ -170,7 +187,7 @@ const Time = styled.div`
 
 const TimerWrap = styled.div`
     padding: 0rem 2rem;
-    margin:auto 1rem;
+    margin:auto 1rem;    
 `;
 
 const TimerText = styled.div`
@@ -181,13 +198,19 @@ const TimerText = styled.div`
     color: black;
     text-align:center;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
         font-size:0.7rem;
+        margin: 0rem auto;
+        width: fit-content;
     }
 `;
 
 const VerticalLine = styled.div`
     border-right: 2px solid black;
+`;
+
+const HorizontalLine = styled.div`
+    border-bottom: 2px solid black;
+    margin: 1rem;
 `;
 
 const CopiedText = styled.div`
@@ -199,11 +222,26 @@ color: ${theme.colors.doordashRed};
 text-align:center;
 margin-top: 1rem;
 @media (max-width: ${theme.sizes.mobile}) {
-    width:15rem;
-    font-size:0.7rem;
+    margin: 1rem auto 0rem auto;
+    width: fit-content;
+    font-size: 0.7rem;
 }
 
 `;
+
+const Mobile = styled.div`
+    display: none;
+    @media (max-width: ${theme.sizes.mobile}) {
+        display: block;
+    }
+`;
+
+const Desktop = styled.div`
+@media (max-width: ${theme.sizes.mobile}) {
+    display: none;
+}
+
+`
 
 
 
@@ -246,15 +284,26 @@ const Modal = (props) => {
                     <WordTile>{letter.toUpperCase()}</WordTile>
                 ))}
             </TodaysWordTiles>
-            <Row>
-                <TimerWrap>
-                    <TimerText>NEXT DOORDLE</TimerText>
-                    <Time><Countdown/></Time>
-                </TimerWrap>
-                <VerticalLine/>
-                <Button onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
-            </Row>
-            {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                <Desktop>
+                <Row>
+                    <TimerWrap>
+                        <TimerText>NEXT DOORDLE</TimerText>
+                        <Time><Countdown/></Time>
+                    </TimerWrap>
+                    <VerticalLine/>
+                    <Button onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
+                </Row>
+                {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                </Desktop>
+                <Mobile>
+                    <Button className='mobile' onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
+                    {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                    <HorizontalLine/>
+                    <TimerWrap className="mobile">
+                        <TimerText>NEXT DOORDLE</TimerText>
+                        <Time><Countdown/></Time>
+                    </TimerWrap>
+                </Mobile>
             <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
             <Input alt="email" type="email"/>
             <Button onClick= {()=>props.setOpenModal(false)}>Submit</Button>
