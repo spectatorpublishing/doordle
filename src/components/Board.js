@@ -27,6 +27,7 @@ const Row = styled.div`
   flex-direction: row;
   margin: 5px;
   flex: 1;
+  justify-content: center;
 `;
 
 const Board = () => {

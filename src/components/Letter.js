@@ -6,8 +6,7 @@ import theme from "../theme";
 const LetterWrapper = styled.div`
   flex: 1;
   height: 3rem;
-  min-height: 3rem;
-  min-width: 3rem;
+  width: 3rem;
   border: 1px solid grey;
   margin: 0px 5px;
   display: grid;
@@ -37,8 +36,8 @@ const LetterWrapper = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    min-height: 0rem;
-    min-width: 0rem;
+    max-height: 3rem;
+    max-width: 3rem;
   }
 `
 
