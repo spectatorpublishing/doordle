@@ -34,7 +34,7 @@ const Background = styled.div`
     background-color:#E0F2F6;
     margin:auto;
     padding:1.8rem 2rem 3.5rem 2rem;
-    margin-top:6rem; 
+    margin-top:3rem; 
     width:27rem;
     border-radius: 10px;
     @media (max-width: ${theme.sizes.mobile}) {

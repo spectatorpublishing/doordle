@@ -72,7 +72,7 @@ const Background = styled.div`
     background-color:#E0F2F6;
     margin:auto;
     padding:1.8rem 2rem 1rem 2rem;
-    margin-top:5rem; 
+    margin-top:1.8rem; 
     width:27rem;
     border-radius: 10px;
     @media (max-width: ${theme.sizes.mobile}) {
@@ -80,7 +80,6 @@ const Background = styled.div`
         padding:1.5rem 2rem 3.5rem 2rem;
     }
 `
-
 
 const X = styled.div`   
     display:block;
@@ -104,6 +103,13 @@ const X = styled.div`
 
 const Bold = styled.span`
     font-weight:600;
+`
+
+const Center = styled.span`
+    display:block;
+    text-align: center;
+    color: ${theme.colors.doordashRed};
+    text-transform: uppercase;
 `
 
 
@@ -130,6 +136,8 @@ const InstructionsPopup = (props) => {
             <ExampleText>The letter I is in the word but in the wrong spot.</ExampleText>
             <WordTile color={theme.colors.white} font={"black"}>C</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>T</WordTile><WordTile color={theme.colors.mediumGreen} font={"black"}>E</WordTile><WordTile color={theme.colors.white} font={"black"}>R</WordTile>
             <ExampleText>The letter E is not in the word in any spot.</ExampleText>
+            <hr/>
+            <Instructions><Bold><Center>Solve the doordle and receive a free meal on us!</Center></Bold></Instructions>
         </Background>
     </div>
   )
