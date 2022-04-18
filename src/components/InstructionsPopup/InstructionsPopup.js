@@ -27,11 +27,10 @@ const Instructions = styled.div`
     text-align:left;
     padding:0.6rem;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:15rem;
         text-align:center;
-        font-size:0.65rem;
-        padding-top:2rem;
-        padding-bottom:1.2rem;
+        font-size:0.8rem;
+        padding-top:0.5rem;
+        padding-bottom:0.5rem;
     }
 `
 const ExampleText = styled.div`
@@ -47,8 +46,8 @@ const ExampleText = styled.div`
     @media (max-width: ${theme.sizes.mobile}) {
         width:15rem;
         text-align:center;
-        font-size:0.65rem;
-        padding-top:2rem;
+        font-size:0.8rem;
+        padding-top:1rem;
         padding-bottom:1.2rem;
     }
 `
@@ -76,8 +75,13 @@ const Background = styled.div`
     width:27rem;
     border-radius: 10px;
     @media (max-width: ${theme.sizes.mobile}) {
-        width:14rem;
-        padding:1.5rem 2rem 3.5rem 2rem;
+        width: 70vw;
+        padding:1.5rem 2rem 1.5rem 2rem;
+        height: fit-content;
+
+        hr {
+            margin: 0.2rem;
+        }
     }
 `
 
@@ -90,14 +94,12 @@ const X = styled.div`
     &.close {
         color: ${theme.colors.black};
         @media (max-width: ${theme.sizes.mobile}) {
-            margin-bottom:1.5rem;
             opacity:0.7;
         }
         cursor:pointer;
         &:hover{
             opacity:0.5;
         }
-
     }
 `;
 
