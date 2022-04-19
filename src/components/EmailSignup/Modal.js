@@ -247,6 +247,8 @@ const Desktop = styled.div`
 
 const Modal = (props) => {
     const [showCopied, setShowCopied] = useState(false)
+    const [email, setEmail] = useState("");
+    const [errorMsg, setErrorMsg] = useState("")
     const gameLogo = "https://doordle.s3.amazonaws.com/logo.png"
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const companyURL = "https://www.doordash.com/"
@@ -264,6 +266,35 @@ const Modal = (props) => {
         });
     }
 
+    const handleSubmit = (email) => {
+        // validate columbia email
+        if (isValidEmail(email)){
+            email = email.split("@")
+            console.log(email[1])
+            if (email[1] === "columbia.edu" || email[1] === "barnard.edu"){
+                // all good allow submit
+
+                props.setOpenModal(false)
+                setErrorMsg("")
+                return;
+            } 
+
+            setErrorMsg("Please enter a valid Columbia or Barnard email address.")
+        }
+    }
+
+    const isValidEmail = (email) => {
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (email.match(mailformat)){
+            console.log("Valid email address!");
+            setErrorMsg("")
+            return true;
+        } else {
+            setErrorMsg("Please enter a valid Columbia or Barnard email address.")
+            return false;
+        }
+    }
+
     useEffect(() => {
         setTimeout(() => {
             setShowCopied(false);
@@ -279,7 +310,6 @@ const Modal = (props) => {
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
             <TodaysWord>{props.guessedWord ?  null :  `TODAY'S DOORDLE:` }</TodaysWord>
-            {console.log(props.correctWord.split(""))}
             <TodaysWordTiles>
                 {props.correctWord.split("").map((letter) => (
                     <WordTile>{letter.toUpperCase()}</WordTile>
@@ -306,8 +336,9 @@ const Modal = (props) => {
                     </TimerWrap>
                 </Mobile>
             <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
-            <Input alt="email" type="email"/>
-            <Button onClick= {()=>props.setOpenModal(false)}>Submit</Button>
+            <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>
+            <Button onClick= {() => handleSubmit(email)}>Submit</Button>
+            {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}
         </Background>
     </div>
   )
