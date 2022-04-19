@@ -3,23 +3,16 @@ import { AppContext } from "../App";
 import Letter from "./Letter";
 import styled from 'styled-components/macro'
 
-const BoardW = styled.div`
-  height: 50rem;
-  width: fit-content;
+const BoardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: fit-content;
+  width: fit-content;
 
   @media only screen and (max-width: 768px) {
     height: 50vh;
     width: 40vh;
   }
-`;
-
-const BoardWrapper = styled.div`
-  margin-top: 1rem;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
 `;
 
 const Row = styled.div`
@@ -32,7 +25,6 @@ const Row = styled.div`
 
 const Board = () => {
   return (
-    <BoardW>
     <BoardWrapper>
       {" "}
       <Row>
@@ -78,7 +70,6 @@ const Board = () => {
         <Letter letterPos={4} attemptVal={5} />
       </Row>
     </BoardWrapper>
-    </BoardW>
   );
 }
 

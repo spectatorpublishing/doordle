@@ -15,6 +15,15 @@ const TopBarWrapper = styled.div`
     display: flex;
 `;
 
+const GameWrapper = styled.div`
+  width: 100vw;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  padding-top: 30px;
+  flex-direction: column;
+`
+
 function App() {
   const [board, setBoard] = useState(boardDefault);
   const [emojiBoard, setEmojiBoard] = useState("");
@@ -203,12 +212,12 @@ function App() {
           checkLikely
         }}
       >
-        <div className="game">
+        <GameWrapper>
           <Board />
           <Keyboard />
           {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
-        </div>
+        </GameWrapper>
       </AppContext.Provider>
     </div>
   );
