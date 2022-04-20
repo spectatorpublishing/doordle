@@ -71,12 +71,9 @@ function App() {
     }
 
     // if any cookies stored, use them to initialize game
-    if (cookies){
-      setOpenInstructions(false)
-    }
-    
     if (cookies.board){
       setBoard(cookies.board)
+      setOpenInstructions(false)
     }
 
     if (cookies.currAttempt){
