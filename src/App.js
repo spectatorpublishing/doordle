@@ -299,7 +299,8 @@ function App() {
           almostLetters,
           gameOver,
           getIndices,
-          checkLikely
+          checkLikely,
+          setCookie
         }}
       >
         <GameWrapper>
