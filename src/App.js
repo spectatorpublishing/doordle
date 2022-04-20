@@ -41,7 +41,7 @@ function App() {
     guessedWord: false,
   });
   const [openModal, setOpenModal] = useState(false);
-  const [openInstructions, setOpenInstructions] = useState(true);
+  const [openInstructions, setOpenInstructions] = useState(false);
 
   useEffect(() => {
     // new word on each re-render
@@ -73,7 +73,8 @@ function App() {
     // if any cookies stored, use them to initialize game
     if (cookies.board){
       setBoard(cookies.board)
-      setOpenInstructions(false)
+    } else {
+      setOpenInstructions(true)
     }
 
     if (cookies.currAttempt){
