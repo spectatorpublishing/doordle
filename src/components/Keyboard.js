@@ -81,6 +81,7 @@ function Keyboard() {
     },
     [currAttempt]
   );
+  
   useEffect(() => {
     document.addEventListener("keydown", handleKeyboard);
 
@@ -88,6 +89,12 @@ function Keyboard() {
       document.removeEventListener("keydown", handleKeyboard);
     };
   }, [handleKeyboard]);
+
+  useEffect(() => {
+    if (gameOver.gameOver){
+      document.removeEventListener("keydown", handleKeyboard);
+    }
+  }, [gameOver.gameOver]);
 
   return (
     <KeyboardWrapper onKeyDown={handleKeyboard}>
