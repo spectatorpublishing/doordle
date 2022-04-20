@@ -92,7 +92,10 @@ function Keyboard() {
   useEffect(() => {
     if (gameOver.gameOver){
       document.removeEventListener("keydown", handleKeyboard);
+    } else {
+      document.addEventListener("keydown", handleKeyboard);
     }
+
   }, [gameOver.gameOver]);
 
   return (
