@@ -77,7 +77,10 @@ function App() {
     
     if (cookies.board){
       setBoard(cookies.board)
-      setCurrAttempt(0);
+    }
+
+    if (cookies.currAttempt){
+      setCurrAttempt(cookies.currAttempt)
     }
 
     if (cookies.gameOver){
@@ -112,6 +115,7 @@ function App() {
     removeCookie("gameOver")
     removeCookie("lastPlayed")
     removeCookie("correctWord")
+    removeCookie("currAttempt")
   }
 
   const setCookies = (guessedWord) => {
@@ -120,6 +124,7 @@ function App() {
     setCookie("correctWord", correctWord, pathAvailable)
     setCookie("gameOver", { gameOver: true, guessedWord: guessedWord }, pathAvailable)
     setCookie("lastPlayed", {day: new Date().getDate(), month: new Date().getMonth()}, pathAvailable)
+    setCookie("currAttempt", currAttempt, pathAvailable)
   }
 
   // find indices of a given character in an array of characters
@@ -214,6 +219,7 @@ function App() {
 
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
+      setCookie("currAttempt", { attempt: currAttempt.attempt + 1, letter: 0 }, {path: "/"})
       updateEmojiBoard(currWord);
     } else {
       return;
@@ -239,20 +245,28 @@ function App() {
     const newBoard = [...board];
     newBoard[currAttempt.attempt][currAttempt.letter - 1] = "";
     setBoard(newBoard);
-    setCookie("board", newBoard, {path: "/"})
     setCurrAttempt({ ...currAttempt, letter: currAttempt.letter - 1 });
+
+    setCookie("board", newBoard, {path: "/"})
+    setCookie("currAttempt", { ...currAttempt, letter: currAttempt.letter - 1 }, {path: "/"})
   };
 
   const onSelectLetter = (key) => {
     if (currAttempt.letter > 5) return;
     const newBoard = [...board];
+    
     newBoard[currAttempt.attempt][currAttempt.letter] = key;
     setBoard(newBoard);
-    setCookie("board", newBoard, {path: "/"})
     setCurrAttempt({
       attempt: currAttempt.attempt,
       letter: currAttempt.letter + 1,
     });
+
+    setCookie("board", newBoard, {path: "/"})
+    setCookie("currAttempt", {
+      attempt: currAttempt.attempt,
+      letter: currAttempt.letter + 1,
+    }, {path: "/"})
   };
 
   return (
