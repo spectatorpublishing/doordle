@@ -85,6 +85,10 @@ function App() {
       setGameOver(cookies.gameOver)
     }
 
+    if (cookies.emojiBoard){
+      setEmojiBoard(cookies.emojiBoard)
+    }
+
     /* console.log("current cookies:\n")
     console.log(cookies) */
   }
@@ -114,6 +118,7 @@ function App() {
     removeCookie("lastPlayed")
     removeCookie("correctWord")
     removeCookie("currAttempt")
+    removeCookie("emojiBoard")
   }
 
   const setCookies = (guessedWord) => {
@@ -123,6 +128,7 @@ function App() {
     setCookie("gameOver", { gameOver: true, guessedWord: guessedWord }, pathAvailable)
     setCookie("lastPlayed", {day: new Date().getDate(), month: new Date().getMonth()}, pathAvailable)
     setCookie("currAttempt", currAttempt, pathAvailable)
+    setCookie("emojiBoard", emojiBoard, pathAvailable)
   }
 
   // find indices of a given character in an array of characters
@@ -205,6 +211,7 @@ function App() {
     newEmojiBoard = newEmojiBoard + "\n"
 
     setEmojiBoard(newEmojiBoard)
+    setCookie("emojiBoard", newEmojiBoard, {path: '/'})
   }
 
   const onEnter = () => {
