@@ -8,6 +8,7 @@ import Modal from "./components/EmailSignup/Modal.js"
 import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
 import InstructionsPopup from "./components/InstructionsPopup/InstructionsPopup";
+import InvalidPopup from "./components/InvalidPopup/InvalidPopup";
 import { useCookies } from "react-cookie";
 
 export const AppContext = createContext();
@@ -308,6 +309,7 @@ function App() {
           <Keyboard />
           {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
+          {showInvalid && <InvalidPopup />}
         </GameWrapper>
       </AppContext.Provider>
     </div>
