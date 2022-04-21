@@ -139,7 +139,7 @@ const Button = styled.button`
     font-size: 1rem;
     display:block;
     margin:auto;
-    background-color:#74A2A5;
+    background-color: ${theme.colors.doordashRed};
     border-radius:5px;
     border:none;
     color:white;
