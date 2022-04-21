@@ -170,9 +170,9 @@ const InstructionsPopup = (props) => {
             <X className="close" onClick= {()=>props.setOpenInstructions(false)}><FontAwesomeIcon icon={faX}/></X>
             <Logo fontColor={theme.colors.doordashRed}/>
             <Spacing/>
-            <Instructions>Guess the <Bold>DOORDLE</Bold> in 6 tries. </Instructions>
-            <Instructions>The correct word contains <Bold>5 letters</Bold> and is related to <Bold>food.</Bold></Instructions>
-            <Instructions>After each guess is submitted, the color of the tiles change to show how close your guess was.</Instructions>
+            <Instructions>Guess the <Bold>DOORDLE</Bold> in 6 tries.</Instructions>
+            <Instructions>Each guess can be any valid <Bold>5-letter word</Bold>, but keep in mind every correct Doordle is a word related to <Bold>food</Bold>! Hit the enter button to submit.</Instructions>
+            <Instructions>After each guess, the color of the tiles will change to show how close your guess was to the word.</Instructions>
             <Instructions><Bold>You can play a new Doordle every 12 hours!</Bold></Instructions>
             <Hr/>
             <Instructions><Bold>Examples:</Bold></Instructions>
