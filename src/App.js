@@ -43,6 +43,7 @@ function App() {
   });
   const [openModal, setOpenModal] = useState(false);
   const [openInstructions, setOpenInstructions] = useState(false);
+  const [showInvalid, setShowInvalid] = useState(false);
 
   useEffect(() => {
     // new word on each re-render
@@ -60,6 +61,12 @@ function App() {
       initializeGame(words.todaysWord)
     })
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowInvalid(false);
+    }, 750);
+  }, [showInvalid]);
 
   // clear any cookies or set game to previous game configuration
   const initializeGame = (todaysWord) => {
@@ -228,6 +235,7 @@ function App() {
       setCookie("currAttempt", { attempt: currAttempt.attempt + 1, letter: 0 }, {path: "/"})
       updateEmojiBoard(currWord);
     } else {
+      setShowInvalid(true);
       return;
     }
 
