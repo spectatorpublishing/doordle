@@ -7,6 +7,10 @@ import Countdown from '../Countdown';
 import { useState, useEffect } from 'react';
 import Logo from '../Logo';
 
+import ReactGoogleSheets from 'react-google-sheets';
+
+
+  
 const OVERLAY_STYLES = {
   position: 'fixed',
   top: 0,
@@ -253,6 +257,8 @@ const Modal = (props) => {
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const companyURL = "https://www.doordash.com/"
 
+    const [sheetLoaded, setSheetLoaded] = useState(false)
+
     const copyToClipboard = () => {
         var guesses = props.guessedWord ? props.emojiBoard.split("\n").length - 1 : "X"
         var emoji = props.guessedWord ? "😎" : "😭"
@@ -273,6 +279,16 @@ const Modal = (props) => {
             console.log(email[1])
             if (email[1] === "columbia.edu" || email[1] === "barnard.edu"){
                 // all good allow submit
+                props.updateCell(
+                    'Winners', // sheetName
+                    'E', // column
+                    13, // row
+                    'Apple', // value
+                    null, // successCallback
+                    (error) => {
+                      console.log('error', error)
+                    } // errorCallback
+                );
 
                 props.setOpenModal(false)
                 setErrorMsg("")
@@ -281,6 +297,7 @@ const Modal = (props) => {
 
             setErrorMsg("Please enter a valid Columbia or Barnard email address.")
         }
+
     }
 
     const isValidEmail = (email) => {
@@ -302,46 +319,57 @@ const Modal = (props) => {
       });
 
   return(
-    <div style={OVERLAY_STYLES}>
-        <Background>
-            <X className="close" onClick= {()=>props.setOpenModal(false)}><FontAwesomeIcon icon={faX}/></X>
-            <Logo fontColor={theme.colors.doordashRed}/>
-            <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
-            {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
-            </Result>
-            <TodaysWord>{props.guessedWord ?  null :  `TODAY'S DOORDLE:` }</TodaysWord>
-            <TodaysWordTiles>
-                {props.correctWord.split("").map((letter) => (
-                    <WordTile>{letter.toUpperCase()}</WordTile>
-                ))}
-            </TodaysWordTiles>
-                <Desktop>
-                <Row>
-                    <TimerWrap>
-                        <TimerText>NEXT DOORDLE</TimerText>
-                        <Time><Countdown/></Time>
-                    </TimerWrap>
-                    <VerticalLine/>
-                    <Button onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
-                </Row>
-                {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
-                </Desktop>
-                <Mobile>
-                    <Button className='mobile' onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
-                    {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
-                    <HorizontalLine/>
-                    <TimerWrap className="mobile">
-                        <TimerText>NEXT DOORDLE</TimerText>
-                        <Time><Countdown/></Time>
-                    </TimerWrap>
-                </Mobile>
-            <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
-            <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>
-            <Button onClick= {() => handleSubmit(email)}>Submit</Button>
-            {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}
-        </Background>
-    </div>
+    <ReactGoogleSheets 
+        clientId= {process.env.GOOGLE_CLIENT_EMAIL}
+        apiKey={process.env.GOOGLE_PRIVATE_KEY}
+        spreadsheetId={process.env.SPREADSHEET_ID}
+        afterLoading={() => setSheetLoaded(true)}
+    >
+        {this.state.sheetLoaded ? 
+            <div style={OVERLAY_STYLES}>
+                <Background>
+                    <X className="close" onClick= {()=>props.setOpenModal(false)}><FontAwesomeIcon icon={faX}/></X>
+                    <Logo fontColor={theme.colors.doordashRed}/>
+                    <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
+                    {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
+                    </Result>
+                    <TodaysWord>{props.guessedWord ?  null :  `TODAY'S DOORDLE:` }</TodaysWord>
+                    <TodaysWordTiles>
+                        {props.correctWord.split("").map((letter) => (
+                            <WordTile>{letter.toUpperCase()}</WordTile>
+                        ))}
+                    </TodaysWordTiles>
+                        <Desktop>
+                        <Row>
+                            <TimerWrap>
+                                <TimerText>NEXT DOORDLE</TimerText>
+                                <Time><Countdown/></Time>
+                            </TimerWrap>
+                            <VerticalLine/>
+                            <Button onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
+                        </Row>
+                        {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                        </Desktop>
+                        <Mobile>
+                            <Button className='mobile' onClick= {() => copyToClipboard()}>Share<FontAwesomeIcon icon={faShareNodes}/></Button>
+                            {showCopied ? <CopiedText>Copied to clipboard</CopiedText> : null}
+                            <HorizontalLine/>
+                            <TimerWrap className="mobile">
+                                <TimerText>NEXT DOORDLE</TimerText>
+                                <Time><Countdown/></Time>
+                            </TimerWrap>
+                        </Mobile>
+                    <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
+                    <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>
+                    <Button onClick= {() => handleSubmit(email)}>Submit</Button>
+                    {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}
+                </Background>
+            </div>
+            :
+            'loading...'
+        }
+    </ReactGoogleSheets>
   )
 }
-export default Modal;
+export default ReactGoogleSheets.connect(Modal);
 
