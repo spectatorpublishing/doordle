@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestion, faX, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple, faQuestion, faX, faXmark } from '@fortawesome/free-solid-svg-icons';
 import CDSShareButton from './CDSShareButton';
 import Logo from '../Logo';
 
@@ -117,8 +117,8 @@ const ShareButton = styled.div`
 `;
 
 const MoreInfoIcon = styled.div`
-    height: fit-content;
-    width: fit-content;
+    height: 1.5rem;
+    width: 1.5rem;
     margin: auto 0.5rem auto auto;
     line-height: 1rem;
     cursor: pointer;
@@ -127,9 +127,28 @@ const MoreInfoIcon = styled.div`
     border: 1.5px solid white;
 
     svg {
-        padding: 0.3rem 0.5rem 0.2rem 0.5rem;
+        margin-top: 0.3rem
     }
     
+    @media (max-width: ${theme.sizes.mobile}) {
+        margin: auto 1rem auto auto;
+    }
+`;
+
+const ShowStatsIcon = styled.div`
+    height: 1.5rem;
+    width: 1.5rem;
+    margin: auto 0.5rem auto 0.5rem;
+    line-height: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    border: 1.5px solid white;
+
+    svg {
+        margin-top: 0.3rem
+    }
+
     @media (max-width: ${theme.sizes.mobile}) {
         margin: auto 1rem auto auto;
     }
@@ -155,6 +174,7 @@ const TopBar = (props) => {
                     </a>
                 </Logos>
                 <MoreInfoIcon onClick={() => props.setOpenInstructions(true)}><FontAwesomeIcon icon={faQuestion}/></MoreInfoIcon>
+                {props.gameOver ? <ShowStatsIcon onClick={() => props.setOpenModal(true)}><FontAwesomeIcon icon={faChartSimple}/></ShowStatsIcon> : null}
                 <LogoWrapper><Logo fontColor="white"/></LogoWrapper>
                 <ShareButton>
                     <CDSShareButton canonical_url={websiteURL} headline={headline}/>

@@ -286,7 +286,7 @@ function App() {
   return (
     <div className="App">
       <TopBarWrapper>
-            <TopBar setOpenInstructions={setOpenInstructions}/>
+            <TopBar setOpenInstructions={setOpenInstructions} setOpenModal={setOpenModal} gameOver={gameOver.gameOver}/>
       </TopBarWrapper>
       <AppContext.Provider
         value={{
