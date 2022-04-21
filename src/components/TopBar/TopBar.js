@@ -97,12 +97,22 @@ const LogoWrapper = styled.div`
         top: 0.5%;
     }
 
-    @media (max-width: 340px) {
+    @media (max-width: 410px) {
         top: 0%;
         left: 0%;
         transform: translate(-0%, -0%);
         margin: 0.5rem 1rem;
     }
+
+    &.gameOver {
+        @media (max-width: 415px) {
+            top: 0%;
+            left: 0%;
+            transform: translate(-0%, -0%);
+            margin: 0.5rem 1rem;
+        }
+    }
+    
 `;
 
 const ShareButton = styled.div`
@@ -150,7 +160,7 @@ const ShowStatsIcon = styled.div`
     }
 
     @media (max-width: ${theme.sizes.mobile}) {
-        margin: auto 1rem auto auto;
+        margin: auto 1rem auto -0.5rem;
     }
 `;
 
@@ -175,7 +185,7 @@ const TopBar = (props) => {
                 </Logos>
                 <MoreInfoIcon onClick={() => props.setOpenInstructions(true)}><FontAwesomeIcon icon={faQuestion}/></MoreInfoIcon>
                 {props.gameOver ? <ShowStatsIcon onClick={() => props.setOpenModal(true)}><FontAwesomeIcon icon={faChartSimple}/></ShowStatsIcon> : null}
-                <LogoWrapper><Logo fontColor="white"/></LogoWrapper>
+                <LogoWrapper className={props.gameOver ? "gameOver" : ""}><Logo fontColor="white" gameOver={props.gameOver}/></LogoWrapper>
                 <ShareButton>
                     <CDSShareButton canonical_url={websiteURL} headline={headline}/>
                 </ShareButton>

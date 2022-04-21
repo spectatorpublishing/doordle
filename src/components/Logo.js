@@ -38,8 +38,14 @@ const Name = styled.h1`
         font-size:1.3rem;
     }
 
-    @media (max-width: 340px) {
+    @media (max-width: 410px) {
         font-size:1rem;
+    }
+
+    &.gameOver {
+        @media (max-width: 415px) {
+            font-size:1rem;
+        }
     }
 `
 
@@ -55,18 +61,24 @@ const Tile = styled.span`
         font-size:1.2rem;
     }
 
-    @media (max-width: 340px) {
+    @media (max-width: 410px) {
         font-size:0.9rem;
         padding:0.2rem 0.5rem;
     }
+
+    &.gameOver {
+        @media (max-width: 415px) {
+            font-size:0.9rem;
+            padding:0.2rem 0.5rem;
+        }
+    }
 `
 
-
-const Logo = ({fontColor}) => {    
+const Logo = ({fontColor, gameOver}) => {    
 
     return (
         <div>
-            <CenterText><Name color={fontColor}>DOOR <Tile>D</Tile><Tile>L</Tile><Tile>E</Tile> DASH</Name></CenterText>
+            <CenterText><Name className={gameOver ? "gameOver" : ""} color={fontColor}>DOOR <Tile className={gameOver ? "gameOver" : ""}>D</Tile><Tile className={gameOver ? "gameOver" : ""}>L</Tile><Tile className={gameOver ? "gameOver" : ""}>E</Tile > DASH</Name></CenterText>
         </div>
     );
 };
