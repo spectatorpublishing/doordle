@@ -18,18 +18,41 @@ const OVERLAY_STYLES = {
   zIndex: 1000
 }
 
-const WordTile = styled.span`
-    background-color: ${theme.colors.correct};
-    padding:0.25rem 0.75rem;
-    margin: 0.1rem;
-    border:none;
-    font-weight:600;
-    color:white;
-    font-size:1.5rem;
-    @media (max-width: ${theme.sizes.mobile}) {
-        font-size:0.9rem;
-        padding:0.3rem 0.5rem;
+const TodaysWordTiles = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin: 1rem auto 2rem auto;
+    flex: 1;
+    justify-content: center;
+
+    @media only screen and (max-width: 768px) {
+    margin: 3px;
     }
+`;
+
+const WordTile = styled.span`
+    height: 3rem;
+  width: 3rem;
+  background-color: ${theme.colors.correct};
+  margin: 0px 5px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  font-weight: bolder;
+  color: ${theme.colors.white};
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 2px;
+
+  @media only screen and (max-width: 768px) {
+    max-height: 3rem;
+    max-width: 3rem;
+    margin: 0px 3px;
+  }
+
+  @media only screen and (max-width: 280px) {
+    max-height: 2.3rem;
+    max-width: 2.3rem;
+  }
 `
 const Background = styled.div`
     background-color:#E0F2F6;
@@ -92,8 +115,7 @@ const Instructions = styled.div`
     font-size: 1rem;
     color: ${theme.colors.doordashRed};
     text-align:center;
-    padding-top:3rem;
-    padding-bottom:1rem;
+    padding: 3rem 2rem 1rem 2rem;
     @media (max-width: ${theme.sizes.mobile}) {
         width:fit-content;
         margin: 0.5rem auto;
@@ -164,13 +186,6 @@ const X = styled.div`
             opacity:0.5;
         }
 
-    }
-`;
-
-const TodaysWordTiles = styled.div`
-    margin-bottom: 3rem;
-    @media (max-width: ${theme.sizes.mobile}) {
-        margin-bottom: 0rem;
     }
 `;
 
@@ -312,7 +327,6 @@ const Modal = (props) => {
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
             <br/>
-            <br/>
             {props.guessedWord ?  <TodaysWordTiles>
                 {
                     props.correctWord.split("").map((letter) => 
@@ -340,7 +354,7 @@ const Modal = (props) => {
                         <Time><Countdown/></Time>
                     </TimerWrap>
                 </Mobile>
-            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>}
+            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE TO GET A FREE MEAL ON US!</Instructions>}
             {props.guessedWord && !props.cookies.emailSubmitted && <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
             {props.guessedWord && !props.cookies.emailSubmitted &&<Button onClick= {() => handleSubmit(email)}>Submit</Button> }
             {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}

@@ -187,7 +187,7 @@ const InstructionsPopup = (props) => {
             <WordTile color={theme.colors.white} font={"black"}>C</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>T</WordTile><WordTile color={theme.colors.wrong} font={"black"}>E</WordTile><WordTile color={theme.colors.white} font={"black"}>R</WordTile>
             <ExampleText>The letter E is not in the word in any spot.</ExampleText>
 
-            <ExampleText><Bold><Color>Solve the doordle and receive a free meal on us!</Color></Bold></ExampleText>
+            <ExampleText><Bold><Color>Solve the doordle for a chance to receive a free meal on us!</Color></Bold></ExampleText>
         </Background>
     </div>
   )
