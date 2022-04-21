@@ -24,10 +24,6 @@ const TodaysWordTiles = styled.div`
     margin: 1rem auto 2rem auto;
     flex: 1;
     justify-content: center;
-
-    @media only screen and (max-width: 768px) {
-    margin: 3px;
-    }
 `;
 
 const WordTile = styled.span`
@@ -61,11 +57,6 @@ const Background = styled.div`
     margin-top:3rem; 
     width:27rem;
     border-radius: 10px;
-
-    @media (max-width: ${theme.sizes.tablet}) {
-        width: 16rem;
-        padding:1.5rem 2rem 1.5rem 2rem;
-    }
 
     @media (max-width: ${theme.sizes.mobile}) {
         width: 75vw;
