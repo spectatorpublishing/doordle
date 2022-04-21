@@ -112,6 +112,7 @@ const Background = styled.div`
     background-color:#E0F2F6;
     width:100%;
     height:100%;
+    
     @media (min-width: ${theme.sizes.mobile}) {
         display:block;
         margin:auto;
@@ -126,8 +127,6 @@ const Background = styled.div`
 const X = styled.div`   
     display:block;
     text-align:right;
-    padding-top:1rem;
-    padding-right:1rem;
     color: ${theme.colors.white};
     
     &.close {
@@ -139,6 +138,11 @@ const X = styled.div`
         &:hover{
             opacity:0.5;
         }
+    }
+
+    @media only screen and (max-width: ${theme.sizes.mobile}) {
+        padding-top:1rem;
+        padding-right:1rem;
     }
 `;
 
