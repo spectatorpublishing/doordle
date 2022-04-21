@@ -127,6 +127,7 @@ function App() {
     removeCookie("correctWord")
     removeCookie("currAttempt")
     removeCookie("emojiBoard")
+    removeCookie("emailSubmitted")
   }
 
   const setCookies = (guessedWord) => {
@@ -230,6 +231,9 @@ function App() {
       currWord += board[currAttempt.attempt][i];
     }
 
+    console.log(board)
+    console.log(currAttempt)
+
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
       setCookie("currAttempt", { attempt: currAttempt.attempt + 1, letter: 0 }, {path: "/"})
@@ -238,6 +242,9 @@ function App() {
       setShowInvalid(true);
       return;
     }
+
+    console.log(board)
+    console.log(currAttempt)
 
     if (currWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
@@ -316,8 +323,8 @@ function App() {
           <Board />
           <Keyboard />
           {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
-          {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
           {showInvalid && <InvalidPopup />}
+          {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard} setCookie={setCookie} cookies={cookies}/>}
         </GameWrapper>
       </AppContext.Provider>
     </div>

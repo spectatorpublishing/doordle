@@ -6,6 +6,7 @@ import { faShare, faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
 import Countdown from '../Countdown';
 import { useState, useEffect } from 'react';
 import Logo from '../Logo';
+import { Cookies } from 'react-cookie';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -276,6 +277,7 @@ const Modal = (props) => {
 
                 props.setOpenModal(false)
                 setErrorMsg("")
+                props.setCookie("emailSubmitted", true, {path: "/"})
                 return;
             } 
 
@@ -338,9 +340,9 @@ const Modal = (props) => {
                         <Time><Countdown/></Time>
                     </TimerWrap>
                 </Mobile>
-            {props.guessedWord && <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>}
-            {props.guessedWord &&  <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
-            {props.guessedWord &&  <Button onClick= {() => handleSubmit(email)}>Submit</Button> }
+            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>}
+            {props.guessedWord && !props.cookies.emailSubmitted && <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
+            {props.guessedWord && !props.cookies.emailSubmitted &&<Button onClick= {() => handleSubmit(email)}>Submit</Button> }
             {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}
         </Background>
     </div>
