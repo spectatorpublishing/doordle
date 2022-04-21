@@ -8,6 +8,7 @@ import Modal from "./components/EmailSignup/Modal.js"
 import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
 import InstructionsPopup from "./components/InstructionsPopup/InstructionsPopup";
+import InvalidPopup from "./components/InvalidPopup/InvalidPopup";
 import { useCookies } from "react-cookie";
 
 export const AppContext = createContext();
@@ -42,6 +43,7 @@ function App() {
   });
   const [openModal, setOpenModal] = useState(false);
   const [openInstructions, setOpenInstructions] = useState(false);
+  const [showInvalid, setShowInvalid] = useState(false);
 
   useEffect(() => {
     // new word on each re-render
@@ -59,6 +61,12 @@ function App() {
       initializeGame(words.todaysWord)
     })
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowInvalid(false);
+    }, 750);
+  }, [showInvalid]);
 
   // clear any cookies or set game to previous game configuration
   const initializeGame = (todaysWord) => {
@@ -227,6 +235,7 @@ function App() {
       setCookie("currAttempt", { attempt: currAttempt.attempt + 1, letter: 0 }, {path: "/"})
       updateEmojiBoard(currWord);
     } else {
+      setShowInvalid(true);
       return;
     }
 
@@ -308,6 +317,7 @@ function App() {
           <Keyboard />
           {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard}/>}
+          {showInvalid && <InvalidPopup />}
         </GameWrapper>
       </AppContext.Provider>
     </div>
