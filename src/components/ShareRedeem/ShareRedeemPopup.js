@@ -18,7 +18,7 @@ const OVERLAY_STYLES = {
 const Name = styled.h1`
     @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
     font-family: 'Rubik', sans-serif;
-    color:#B71000;
+    color: ${theme.colors.doordashRed};
     font-weight:600;
     font-size:1.2rem;
     @media (max-width: ${theme.sizes.mobile}) {
@@ -88,7 +88,7 @@ const Button = styled.button`
     font-weight:500;
     display:block;
     margin:auto;
-    background-color:#B71000;
+    background-color:${theme.colors.doordashRed};
     border-radius:5px;
     border:none;
     color:white;

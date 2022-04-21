@@ -19,19 +19,19 @@ const LetterWrapper = styled.div`
   border-radius: 2px;
 
   &.correct {
-    background-color: #B71000;
+    background-color: ${theme.colors.correct};
     color: white;
     border: 0px;
   }
   
   &.likely {
-    background-color: #EFC3C0;
+    background-color: ${theme.colors.likely};
     color: white;
     border: 0px;
   }
   
   &.error {
-    background-color: ${theme.colors.mediumGreen};
+    background-color: ${theme.colors.wrong};
     color: white;
     border: 0px;
   }

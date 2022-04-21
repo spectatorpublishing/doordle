@@ -12,8 +12,8 @@ const KeyWrapper = styled.div`
   place-items: center;
   font-size: 1rem;
   font-weight: bold;
-  background-color: #E0F2F6;
-  color: #000000;
+  background-color: ${theme.colors.doordashRed};
+  color: white;
   font-family: 'Rubik', sans-serif;
   cursor: pointer;
 
@@ -22,15 +22,15 @@ const KeyWrapper = styled.div`
   }
 
   &.correct {
-    background-color: ${theme.colors.doordashRed};
+    background-color: ${theme.colors.correct};
   }
   
   &.almost {
-    background-color: ${theme.colors.salmon};
+    background-color: ${theme.colors.likely};
   }
   
   &.disabled {
-    background-color: ${theme.colors.mediumGreen};
+    background-color: ${theme.colors.wrong};
   }
 
   @media only screen and (max-width: 768px) {

@@ -18,7 +18,7 @@ const OVERLAY_STYLES = {
 }
 
 const WordTile = styled.span`
-    background-color:#B71000;
+    background-color: ${theme.colors.correct};
     padding:0.25rem 0.75rem;
     margin: 0.1rem;
     border:none;

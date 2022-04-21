@@ -7,7 +7,10 @@ const theme = {
     lightGreen: "#E0F2F6",
     pink: "#FCEEEC",
     salmon: "#EFC3C0",
-    doordashRed: "#B71000"
+    doordashRed: "#B71000",
+    correct: "#419d78",
+    likely: "#F9C80E",
+    wrong: "#ABABAB"
   },
   sizes: {
     mobile: "767px",

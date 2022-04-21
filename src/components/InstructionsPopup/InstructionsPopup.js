@@ -176,11 +176,11 @@ const InstructionsPopup = (props) => {
             <Instructions><Bold>You can play a new Doordle every 12 hours!</Bold></Instructions>
             <Hr/>
             <Instructions><Bold>Examples:</Bold></Instructions>
-            <WordTile color={theme.colors.doordashRed}>P</WordTile><WordTile color={theme.colors.white} font={"black"}> I </WordTile><WordTile color={theme.colors.white} font={"black"}>Z</WordTile><WordTile color={theme.colors.white} font={"black"}>Z</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile>
+            <WordTile color={theme.colors.correct}>P</WordTile><WordTile color={theme.colors.white} font={"black"}> I </WordTile><WordTile color={theme.colors.white} font={"black"}>Z</WordTile><WordTile color={theme.colors.white} font={"black"}>Z</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile>
             <ExampleText>The letter P is in the word and in the correct spot.</ExampleText>
-            <WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>N</WordTile><WordTile color={theme.colors.salmon} font={"black"}> I </WordTile><WordTile color={theme.colors.white} font={"black"}>S</WordTile><WordTile color={theme.colors.white} font={"black"}>E</WordTile>
+            <WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>N</WordTile><WordTile color={theme.colors.likely} font={"black"}> I </WordTile><WordTile color={theme.colors.white} font={"black"}>S</WordTile><WordTile color={theme.colors.white} font={"black"}>E</WordTile>
             <ExampleText>The letter I is in the word but in the wrong spot.</ExampleText>
-            <WordTile color={theme.colors.white} font={"black"}>C</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>T</WordTile><WordTile color={theme.colors.mediumGreen} font={"black"}>E</WordTile><WordTile color={theme.colors.white} font={"black"}>R</WordTile>
+            <WordTile color={theme.colors.white} font={"black"}>C</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>T</WordTile><WordTile color={theme.colors.wrong} font={"black"}>E</WordTile><WordTile color={theme.colors.white} font={"black"}>R</WordTile>
             <ExampleText>The letter E is not in the word in any spot.</ExampleText>
 
             <ExampleText><Bold><Color>Solve the doordle and receive a free meal on us!</Color></Bold></ExampleText>
