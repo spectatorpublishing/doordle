@@ -96,6 +96,13 @@ const LogoWrapper = styled.div`
         margin: auto auto auto auto;
         top: 0.5%;
     }
+
+    @media (max-width: 340px) {
+        top: 0%;
+        left: 0%;
+        transform: translate(-0%, -0%);
+        margin: 0.5rem 1rem;
+    }
 `;
 
 const ShareButton = styled.div`

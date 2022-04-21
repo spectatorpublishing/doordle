@@ -26,10 +26,6 @@ const StyledShareButton = styled.button`
       transform: translateX(-100%);
       transition: 300ms ease-in-out 150ms;
     `}
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const ShareCircle = styled.div`
