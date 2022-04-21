@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 import styled from 'styled-components'
 import theme from "../theme";
+import GameOver from "./GameOver";
 
 const LetterWrapper = styled.div`
   flex: 1;
@@ -46,7 +47,7 @@ const LetterWrapper = styled.div`
 `
 
 function Letter({ letterPos, attemptVal }) {
-  const { board, setDisabledLetters, setCorrectLetters, setAlmostLetters, currAttempt, correctWord, getIndices, checkLikely } =
+  const { board, setDisabledLetters, setCorrectLetters, setAlmostLetters, currAttempt, setCurrAttempt, correctWord, getIndices, checkLikely, gameOver } =
     useContext(AppContext);
   const letter = board[attemptVal][letterPos];
   const correct = correctWord.toUpperCase()[letterPos] === letter;
@@ -71,6 +72,11 @@ function Letter({ letterPos, attemptVal }) {
     }
     else if (letter !== "" && likely) {
       setAlmostLetters((prev) => [...prev, letter]);
+    }
+    console.log("curr attempt: ", currAttempt);
+
+    if (currAttempt.letter === 5 && currAttempt.attempt != 5 && board[currAttempt.attempt+1][0] === "") {
+      setCurrAttempt({ attempt: currAttempt.attempt+1, letter: 0});
     }
   }, [currAttempt.attempt]);
   return (
