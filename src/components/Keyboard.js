@@ -7,7 +7,6 @@ import theme from "../theme";
 const KeyboardWrapper = styled.div`
   margin: 1.3rem 0rem 2rem 0rem; 
   padding: 0rem;
-
   @media only screen and (max-width: 768px) {
     width: 90%;
     margin: 2rem 0rem 0rem 0rem; 
@@ -81,6 +80,7 @@ function Keyboard() {
     },
     [currAttempt]
   );
+  
   useEffect(() => {
     document.addEventListener("keydown", handleKeyboard);
 
@@ -88,6 +88,15 @@ function Keyboard() {
       document.removeEventListener("keydown", handleKeyboard);
     };
   }, [handleKeyboard]);
+
+  useEffect(() => {
+    if (gameOver.gameOver){
+      document.removeEventListener("keydown", handleKeyboard);
+    } else {
+      document.addEventListener("keydown", handleKeyboard);
+    }
+
+  }, [gameOver.gameOver]);
 
   return (
     <KeyboardWrapper onKeyDown={handleKeyboard}>

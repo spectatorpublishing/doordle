@@ -39,6 +39,10 @@ const LetterWrapper = styled.div`
     max-height: 3rem;
     max-width: 3rem;
   }
+  @media only screen and (max-width: 600px) {
+    max-height: 2.3rem;
+    max-width: 2.3rem;
+  }
 `
 
 function Letter({ letterPos, attemptVal }) {
@@ -53,7 +57,7 @@ function Letter({ letterPos, attemptVal }) {
 
     // check whether to highlight as likely
     && checkLikely([...correctWord.toUpperCase()], board[attemptVal], letterPos));
-
+  
   const letterState =
     currAttempt.attempt > attemptVal &&
     (correct ? "correct" : likely ? "likely" : "error");

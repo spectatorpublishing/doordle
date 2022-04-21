@@ -8,6 +8,7 @@ import Modal from "./components/EmailSignup/Modal.js"
 import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
 import InstructionsPopup from "./components/InstructionsPopup/InstructionsPopup";
+import { useCookies } from "react-cookie";
 
 export const AppContext = createContext();
 
@@ -25,6 +26,8 @@ const GameWrapper = styled.div`
 `
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies()
+
   const [board, setBoard] = useState(boardDefault);
   const [emojiBoard, setEmojiBoard] = useState("");
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letter: 0 });
@@ -38,7 +41,7 @@ function App() {
     guessedWord: false,
   });
   const [openModal, setOpenModal] = useState(false);
-  const [openInstructions, setOpenInstructions] = useState(true);
+  const [openInstructions, setOpenInstructions] = useState(false);
 
   useEffect(() => {
     // new word on each re-render
@@ -52,8 +55,81 @@ function App() {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
       console.log("chosen word: ", words.todaysWord);
+
+      initializeGame(words.todaysWord)
     })
   }, []);
+
+  // clear any cookies or set game to previous game configuration
+  const initializeGame = (todaysWord) => {
+    /* console.log("current cookies:\n")
+    console.log(cookies) */
+
+    if (cookies.lastPlayed && !alreadyPlayed(todaysWord)){
+      // if not already played with current word, clear cookies
+      clearCookies()
+    }
+
+    // if any cookies stored, use them to initialize game
+    if (cookies.board){
+      setBoard(cookies.board)
+    } else {
+      setOpenInstructions(true)
+    }
+
+    if (cookies.currAttempt){
+      setCurrAttempt(cookies.currAttempt)
+    }
+
+    if (cookies.gameOver){
+      setGameOver(cookies.gameOver)
+    }
+
+    if (cookies.emojiBoard){
+      setEmojiBoard(cookies.emojiBoard)
+    }
+
+    /* console.log("current cookies:\n")
+    console.log(cookies) */
+  }
+
+  const alreadyPlayed = (todaysWord) => {
+    var currentDate = new Date();
+
+    // if last time played is not today, they can play again
+    if (cookies.lastPlayed.day !== currentDate.getDate() && cookies.lastPlayed.month !== currentDate.getMonth()){
+      console.log("last time played not today")
+      return false;
+    }
+
+    // if they have already played today, if the current correct word
+    // is different that their last correct word, they can play
+    if (todaysWord !== cookies.correctWord){
+      console.log("different new word")
+      return false;
+    }
+
+    return true;
+  }
+
+  const clearCookies = () => {
+    removeCookie("board")
+    removeCookie("gameOver")
+    removeCookie("lastPlayed")
+    removeCookie("correctWord")
+    removeCookie("currAttempt")
+    removeCookie("emojiBoard")
+  }
+
+  const setCookies = (guessedWord) => {
+    var pathAvailable = {path: "/"}
+    setCookie("board", board, pathAvailable)
+    setCookie("correctWord", correctWord, pathAvailable)
+    setCookie("gameOver", { gameOver: true, guessedWord: guessedWord }, pathAvailable)
+    setCookie("lastPlayed", {day: new Date().getDate(), month: new Date().getMonth()}, pathAvailable)
+    setCookie("currAttempt", currAttempt, pathAvailable)
+    setCookie("emojiBoard", emojiBoard, pathAvailable)
+  }
 
   // find indices of a given character in an array of characters
   const getIndices = (word_arr, character) => {
@@ -135,6 +211,7 @@ function App() {
     newEmojiBoard = newEmojiBoard + "\n"
 
     setEmojiBoard(newEmojiBoard)
+    setCookie("emojiBoard", newEmojiBoard, {path: '/'})
   }
 
   const onEnter = () => {
@@ -147,6 +224,7 @@ function App() {
 
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
+      setCookie("currAttempt", { attempt: currAttempt.attempt + 1, letter: 0 }, {path: "/"})
       updateEmojiBoard(currWord);
     } else {
       return;
@@ -154,12 +232,14 @@ function App() {
 
     if (currWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
+      setCookies(true)
       setOpenModal(true);
       return;
     }
 
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });
+      setCookies(false)
       setOpenModal(true);
       return;
     }
@@ -171,17 +251,27 @@ function App() {
     newBoard[currAttempt.attempt][currAttempt.letter - 1] = "";
     setBoard(newBoard);
     setCurrAttempt({ ...currAttempt, letter: currAttempt.letter - 1 });
+
+    setCookie("board", newBoard, {path: "/"})
+    setCookie("currAttempt", { ...currAttempt, letter: currAttempt.letter - 1 }, {path: "/"})
   };
 
   const onSelectLetter = (key) => {
     if (currAttempt.letter > 5) return;
     const newBoard = [...board];
+    
     newBoard[currAttempt.attempt][currAttempt.letter] = key;
     setBoard(newBoard);
     setCurrAttempt({
       attempt: currAttempt.attempt,
       letter: currAttempt.letter + 1,
     });
+
+    setCookie("board", newBoard, {path: "/"})
+    setCookie("currAttempt", {
+      attempt: currAttempt.attempt,
+      letter: currAttempt.letter + 1,
+    }, {path: "/"})
   };
 
   return (
@@ -209,7 +299,8 @@ function App() {
           almostLetters,
           gameOver,
           getIndices,
-          checkLikely
+          checkLikely,
+          setCookie
         }}
       >
         <GameWrapper>

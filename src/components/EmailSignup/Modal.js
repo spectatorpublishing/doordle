@@ -309,12 +309,15 @@ const Modal = (props) => {
             <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
-            <TodaysWord>{props.guessedWord ?  null :  `TODAY'S DOORDLE:` }</TodaysWord>
-            <TodaysWordTiles>
-                {props.correctWord.split("").map((letter) => (
-                    <WordTile>{letter.toUpperCase()}</WordTile>
-                ))}
-            </TodaysWordTiles>
+            <br/>
+            <br/>
+            {props.guessedWord ?  <TodaysWordTiles>
+                {
+                    props.correctWord.split("").map((letter) => 
+                    (
+                        <WordTile>{letter.toUpperCase()}</WordTile>))}
+                    </TodaysWordTiles>
+            : null}
                 <Desktop>
                 <Row>
                     <TimerWrap>
@@ -335,9 +338,9 @@ const Modal = (props) => {
                         <Time><Countdown/></Time>
                     </TimerWrap>
                 </Mobile>
-            <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>
-            <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>
-            <Button onClick= {() => handleSubmit(email)}>Submit</Button>
+            {props.guessedWord && <Instructions>ENTER YOUR EMAIL, GET A FREE MEAL ON US!</Instructions>}
+            {props.guessedWord &&  <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
+            {props.guessedWord &&  <Button onClick= {() => handleSubmit(email)}>Submit</Button> }
             {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}
         </Background>
     </div>
