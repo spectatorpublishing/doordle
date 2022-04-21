@@ -23,13 +23,13 @@ const LetterWrapper = styled.div`
     border: 0px;
   }
   
-  &.almost {
+  &.likely {
     background-color: #EFC3C0;
     color: white;
     border: 0px;
   }
   
-  &.disabled {
+  &.error {
     background-color: ${theme.colors.mediumGreen};
     color: white;
     border: 0px;
@@ -54,7 +54,9 @@ function Letter({ letterPos, attemptVal }) {
     // check whether to highlight as likely
     && checkLikely([...correctWord.toUpperCase()], board[attemptVal], letterPos));
   
-  const disabled = (letter !== "" && !correct && !likely)
+  const letterState =
+    currAttempt.attempt > attemptVal &&
+    (correct ? "correct" : likely ? "likely" : "error");
 
   useEffect(() => {
     if (letter !== "" && !correct && !likely) {
@@ -68,7 +70,7 @@ function Letter({ letterPos, attemptVal }) {
     }
   }, [currAttempt.attempt]);
   return (
-    <LetterWrapper className={correct ? "correct" : likely ? "almost" : disabled ? "disabled" : null} >
+    <LetterWrapper className={letterState}>
       {letter}
     </LetterWrapper>
   );

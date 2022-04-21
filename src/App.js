@@ -77,7 +77,6 @@ function App() {
     
     if (cookies.board){
       setBoard(cookies.board)
-      setCurrAttempt(0);
     }
 
     if (cookies.gameOver){
