@@ -50,6 +50,7 @@ function Letter({ letterPos, attemptVal }) {
   const { board, setDisabledLetters, setCorrectLetters, setAlmostLetters, currAttempt, setCurrAttempt, correctWord, getIndices, checkLikely, gameOver } =
     useContext(AppContext);
   const letter = board[attemptVal][letterPos];
+  //const [letterState, setLetterState] = useState();
   const correct = correctWord.toUpperCase()[letterPos] === letter;
 
   const likely =
@@ -60,8 +61,8 @@ function Letter({ letterPos, attemptVal }) {
     && checkLikely([...correctWord.toUpperCase()], board[attemptVal], letterPos));
   
   const letterState =
-    currAttempt.attempt > attemptVal &&
-    (correct ? "correct" : likely ? "likely" : "error");
+    ( (currAttempt.attempt > attemptVal) || (currAttempt.attempt === attemptVal && attemptVal === 5 && gameOver.gameOver))
+    && (correct ? "correct" : likely ? "likely" : letter !== "" ? "error": null);
 
   useEffect(() => {
     if (letter !== "" && !correct && !likely) {
@@ -73,9 +74,8 @@ function Letter({ letterPos, attemptVal }) {
     else if (letter !== "" && likely) {
       setAlmostLetters((prev) => [...prev, letter]);
     }
-    console.log("curr attempt: ", currAttempt);
 
-    if (currAttempt.letter === 5 && currAttempt.attempt != 5 && board[currAttempt.attempt+1][0] === "") {
+    if (currAttempt.letter === 5 && currAttempt.attempt !== 5 && board[currAttempt.attempt+1][0] === "") {
       setCurrAttempt({ attempt: currAttempt.attempt+1, letter: 0});
     }
   }, [currAttempt.attempt]);
