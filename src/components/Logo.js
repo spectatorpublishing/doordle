@@ -27,6 +27,9 @@ const Name = styled.h1`
     color: ${props => props.color};
     font-weight:800;
     font-size:1.4rem;
+    @media (max-width: ${theme.sizes.mobile}) {
+        font-size:1.3rem;
+    }
 `
 
 const Tile = styled.span`
@@ -37,6 +40,9 @@ const Tile = styled.span`
     color:black;
     font-size:1.25rem;
     font-weight: 800;
+    @media (max-width: ${theme.sizes.mobile}) {
+        font-size:1.2rem;
+    }
 `
 
 
