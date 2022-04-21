@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleQuestion, faX, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faQuestion, faX, faXmark } from '@fortawesome/free-solid-svg-icons';
 import CDSShareButton from './CDSShareButton';
 import Logo from '../Logo';
 
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     flex-direction: row;
 
     @media (max-width: ${theme.sizes.mobile}) {
-        height: 4rem;
+        height: 3.6rem;
     }
 `;
 
@@ -23,7 +23,7 @@ const Logos = styled.div`
     flex-direction: row;
     height: fit-content;
     width: fit-content;
-    margin: 0.5rem auto 0.5rem 0.5rem;
+    margin: 0.5rem 1rem 0.5rem 0.5rem;
 
     a {
         height: fit-content;
@@ -85,15 +85,21 @@ const X = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-    margin: auto 4rem auto 1rem;
+    margin: auto;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -0%);
+    width: fit-content;
     
     @media (max-width: ${theme.sizes.mobile}) {
         margin: auto auto auto auto;
+        top: 0.5%;
     }
 `;
 
 const ShareButton = styled.div`
-    margin: auto 1.5rem auto auto;
+    margin: auto 1.5rem auto 1rem;
     width: fit-content;
     height: fit-content;
 
@@ -103,8 +109,27 @@ const ShareButton = styled.div`
     }
 `;
 
+const MoreInfoIcon = styled.div`
+    height: fit-content;
+    width: fit-content;
+    margin: auto 0.5rem auto auto;
+    line-height: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    border: 1.5px solid white;
 
-const TopBar = () => {
+    svg {
+        padding: 0.3rem 0.5rem 0.2rem 0.5rem;
+    }
+    
+    @media (max-width: ${theme.sizes.mobile}) {
+        margin: auto 1rem auto auto;
+    }
+`;
+
+
+const TopBar = (props) => {
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const websiteURL = "https://doordash.columbiaspectator.com"
     const companyURL = "https://www.doordash.com/"
@@ -122,11 +147,12 @@ const TopBar = () => {
                         <CompanyLogo><img src={companyLogo}/></CompanyLogo>
                     </a>
                 </Logos>
+                <MoreInfoIcon onClick={() => props.setOpenInstructions(true)}><FontAwesomeIcon icon={faQuestion}/></MoreInfoIcon>
                 <LogoWrapper><Logo fontColor="white"/></LogoWrapper>
                 <ShareButton>
                     <CDSShareButton canonical_url={websiteURL} headline={headline}/>
                 </ShareButton>
-            </Wrapper>
+        </Wrapper>
     );
     
 };
