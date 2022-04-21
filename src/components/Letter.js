@@ -21,26 +21,28 @@ const LetterWrapper = styled.div`
   &.correct {
     background-color: ${theme.colors.correct};
     color: white;
-    border: 0px;
+    border: 1px solid ${theme.colors.correct};
   }
   
   &.likely {
     background-color: ${theme.colors.likely};
     color: white;
-    border: 0px;
+    border: 1px solid ${theme.colors.likely};  
   }
   
   &.error {
     background-color: ${theme.colors.wrong};
     color: white;
     border: 0px;
+    border: 1px solid ${theme.colors.wrong};
   }
 
   @media only screen and (max-width: 768px) {
     max-height: 3rem;
     max-width: 3rem;
   }
-  @media only screen and (max-width: 600px) {
+
+  @media only screen and (max-width: 250px) {
     max-height: 2.3rem;
     max-width: 2.3rem;
   }

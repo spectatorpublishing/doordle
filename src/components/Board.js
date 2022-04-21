@@ -8,11 +8,6 @@ const BoardWrapper = styled.div`
   flex-direction: column;
   height: fit-content;
   width: fit-content;
-
-  @media only screen and (max-width: 768px) {
-    height: 50vh;
-    width: 40vh;
-  }
 `;
 
 const Row = styled.div`
@@ -21,6 +16,10 @@ const Row = styled.div`
   margin: 5px;
   flex: 1;
   justify-content: center;
+
+  @media only screen and (max-width: 768px) {
+    margin: 3px;
+  }
 `;
 
 const Board = () => {
