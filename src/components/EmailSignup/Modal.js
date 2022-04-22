@@ -335,13 +335,12 @@ const Modal = (props) => {
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
             <br/>
-            {props.guessedWord ?  <TodaysWordTiles>
+            <TodaysWordTiles>
                 {
                     props.correctWord.split("").map((letter) => 
                     (
                         <WordTile>{letter.toUpperCase()}</WordTile>))}
-                    </TodaysWordTiles>
-            : null}
+            </TodaysWordTiles>
                 <Desktop>
                 <Row>
                     <TimerWrap>
@@ -365,7 +364,8 @@ const Modal = (props) => {
             {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE TO GET A FREE MEAL ON US!</Instructions>}
             {props.guessedWord && !props.cookies.emailSubmitted && <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
             {errorMsg === "" ? null : <Instructions className="error">{errorMsg}</Instructions>}
-            {props.guessedWord && !props.cookies.emailSubmitted &&<Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> }
+            {(props.guessedWord && !props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> :             <br/>
+}
         </Background>
     </div>
   )
