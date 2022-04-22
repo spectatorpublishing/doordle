@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import Logo from '../Logo';
 import { Cookies } from 'react-cookie';
 
+
 const OVERLAY_STYLES = {
   position: 'fixed',
   top: 0,
@@ -273,17 +274,29 @@ const Modal = (props) => {
         });
     }
 
+    const myRequest = () =>{
+        fetch(`https://docs.google.com/forms/d/e/1FAIpQLScR2wa5JWpE6Fnvxkl11XR5fBxfeRxOEzYkhKzwBUnLUUzu6g/formResponse?entry.1079938000=${email}`, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+        })
+        .then(response=> {
+            setErrorMsg("You're all set! Keep an eye on your email to see if you won.")
+            props.setCookie("emailSubmitted", true, {path: "/"})
+        })  
+    }
+
     const handleSubmit = (email) => {
         // validate columbia email
         if (isValidEmail(email)){
             email = email.split("@")
-            console.log(email[1])
             if (email[1] === "columbia.edu" || email[1] === "barnard.edu"){
                 // all good allow submit
-
-                props.setOpenModal(false)
-                setErrorMsg("")
-                props.setCookie("emailSubmitted", true, {path: "/"})
+                let confirmedEmail= `${email[0]}@${email[1]}`
+                setEmail(confirmedEmail);
+                myRequest();
                 return;
             } 
 
@@ -309,6 +322,7 @@ const Modal = (props) => {
         }, 500);
       });
 
+
   return(
     <div style={OVERLAY_STYLES}>
         <Background>
@@ -317,14 +331,13 @@ const Modal = (props) => {
             <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
-            <br/>
-            {props.guessedWord ?  <TodaysWordTiles>
+            <TodaysWord>THE WORD WAS:</TodaysWord>
+             <TodaysWordTiles>
                 {
                     props.correctWord.split("").map((letter) => 
                     (
                         <WordTile>{letter.toUpperCase()}</WordTile>))}
-                    </TodaysWordTiles>
-            : null}
+            </TodaysWordTiles>
                 <Desktop>
                 <Row>
                     <TimerWrap>
@@ -346,8 +359,8 @@ const Modal = (props) => {
                     </TimerWrap>
                 </Mobile>
             {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE TO GET A FREE MEAL ON US!</Instructions>}
-            {props.guessedWord && !props.cookies.emailSubmitted && <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
-            {props.guessedWord && !props.cookies.emailSubmitted &&<Button onClick= {() => handleSubmit(email)}>Submit</Button> }
+             {props.guessedWord && !props.cookies.emailSubmitted && <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
+             {props.guessedWord && !props.cookies.emailSubmitted &&<Button onClick= {() => handleSubmit(email)}>Submit</Button> }
             {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}
         </Background>
     </div>
