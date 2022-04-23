@@ -53,14 +53,14 @@ const WordTile = styled.span`
 const Background = styled.div`
     background-color:#E0F2F6;
     margin:auto;
-    padding:1.8rem 2rem 3.5rem 2rem;
-    margin-top:3rem; 
+    padding:1.8rem 2rem 1rem 2rem;
+    margin-top:1rem; 
     width:27rem;
     border-radius: 10px;
 
     @media (max-width: ${theme.sizes.mobile}) {
         width: 75vw;
-        padding:1.5rem 2rem 2.5rem 2rem;
+        padding:1.5rem 2rem 1rem 2rem;
     }
 `
 
@@ -107,12 +107,21 @@ const Instructions = styled.div`
     color: ${theme.colors.doordashRed};
     text-align:center;
     padding: 3rem 2rem 1rem 2rem;
+
+    &.error{
+        padding: 0rem 2rem 1rem 2rem;
+    }
+
     @media (max-width: ${theme.sizes.mobile}) {
         width:fit-content;
         margin: 0.5rem auto;
         font-size:0.7rem;
         padding-top:1rem;
         padding-bottom:1rem;
+
+        &.error{
+            padding: 0rem 2rem 1rem 2rem;
+        }
     }
 `
 
@@ -146,9 +155,13 @@ const Button = styled.button`
     padding:0.8rem 1rem;
     //margin-top:1.5rem;
     @media (max-width: ${theme.sizes.mobile}) {
-        margin-top:1.5rem;
-        padding:0.6rem 0.7rem;
-        font-size:0.8rem;
+        margin-top:0rem;
+        padding: 1rem 1.5rem;
+        font-size:1rem;
+
+        &.submit {
+            margin-bottom: 0rem;
+        }
     }
     &:hover{
         cursor:pointer;
@@ -157,6 +170,10 @@ const Button = styled.button`
 
     svg {
         margin: auto 0rem auto 0.5rem;
+    }
+
+    &.submit {
+        margin-bottom:1.5rem;
     }
 `
 
@@ -318,13 +335,12 @@ const Modal = (props) => {
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
             <br/>
-            {props.guessedWord ?  <TodaysWordTiles>
+            <TodaysWordTiles>
                 {
                     props.correctWord.split("").map((letter) => 
                     (
                         <WordTile>{letter.toUpperCase()}</WordTile>))}
-                    </TodaysWordTiles>
-            : null}
+            </TodaysWordTiles>
                 <Desktop>
                 <Row>
                     <TimerWrap>
@@ -347,8 +363,9 @@ const Modal = (props) => {
                 </Mobile>
             {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE TO GET A FREE MEAL ON US!</Instructions>}
             {props.guessedWord && !props.cookies.emailSubmitted && <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
-            {props.guessedWord && !props.cookies.emailSubmitted &&<Button onClick= {() => handleSubmit(email)}>Submit</Button> }
-            {errorMsg === "" ? null : <Instructions>{errorMsg}</Instructions>}
+            {errorMsg === "" ? null : <Instructions className="error">{errorMsg}</Instructions>}
+            {(props.guessedWord && !props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> :             <br/>
+}
         </Background>
     </div>
   )

@@ -322,7 +322,7 @@ function App() {
         <GameWrapper>
           <Board />
           <Keyboard />
-          {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
+          {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions} gameOver={gameOver.gameOver}/>}
           {showInvalid && <InvalidPopup />}
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard} setCookie={setCookie} cookies={cookies}/>}
         </GameWrapper>

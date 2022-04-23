@@ -112,12 +112,13 @@ const Background = styled.div`
     background-color:#E0F2F6;
     width:100%;
     height:100%;
+    padding-top: 1rem;
     
     @media (min-width: ${theme.sizes.mobile}) {
         display:block;
         margin:auto;
-        padding:1.8rem 2rem 1rem 2rem;
-        margin-top:1.8rem; 
+        padding:1.8rem 2rem 2rem 2rem;
+        margin-top:1rem; 
         width:27rem;
         height:fit-content;
         border-radius: 10px; 
@@ -141,7 +142,7 @@ const X = styled.div`
     }
 
     @media only screen and (max-width: ${theme.sizes.mobile}) {
-        padding-top:1rem;
+        //padding-top:1rem;
         padding-right:1rem;
     }
 `;
@@ -162,16 +163,43 @@ const Hr = styled.hr`
     margin:1rem;
 `
 
+const Button = styled.button`
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
+    font-weight:600;
+    font-size: 1rem;
+    display:block;
+    margin:auto;
+    background-color: ${theme.colors.doordashRed};
+    border-radius:5px;
+    border:none;
+    color:white;
+    padding:0.7rem 1.2rem;
+    //margin-top:1.5rem;
+    @media (max-width: ${theme.sizes.mobile}) {
+        margin-top:0rem;
+        padding: 1rem 1.5rem;
+        font-size:1rem;
+    }
+    &:hover{
+        cursor:pointer;
+        opacity:0.85;
+    }
+
+    svg {
+        margin: auto 0rem auto 0.5rem;
+    }
+`
+
 
 const InstructionsPopup = (props) => {
     const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
     const companyURL = "https://www.doordash.com/"
 
-
   return(
     <div style={OVERLAY_STYLES}>
         <Background>
-            <X className="close" onClick= {()=>props.setOpenInstructions(false)}><FontAwesomeIcon icon={faX}/></X>
+            {(!props.gameOver) ? null : <X className="close" onClick= {()=> props.setOpenInstructions(false)}><FontAwesomeIcon icon={faX}/></X>}
             <Logo fontColor={theme.colors.doordashRed}/>
             <Spacing/>
             <Instructions>Guess the <Bold>DOORDLE</Bold> in 6 tries.</Instructions>
@@ -188,6 +216,7 @@ const InstructionsPopup = (props) => {
             <ExampleText>The letter E is not in the word in any spot.</ExampleText>
 
             <ExampleText><Bold><Color>Solve the doordle for a chance to receive a free meal on us!</Color></Bold></ExampleText>
+            { (!props.gameOver) ? <Button onClick= {() => props.setOpenInstructions(false)}>Play</Button> : null}
         </Background>
     </div>
   )
