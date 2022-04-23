@@ -66,7 +66,7 @@ function Letter({ letterPos, attemptVal }) {
     && checkLikely([...correctWord.toUpperCase()], board[attemptVal], letterPos));
   
   const letterState =
-    ( (currAttempt.attempt > attemptVal) || (currAttempt.attempt === attemptVal && attemptVal === 5 && gameOver.gameOver))
+    ( (currAttempt.attempt > attemptVal) || gameOver.gameOver)
     && (correct ? "correct" : likely ? "likely" : letter !== "" ? "error": null);
 
   useEffect(() => {
@@ -78,10 +78,6 @@ function Letter({ letterPos, attemptVal }) {
     }
     else if (letter !== "" && likely) {
       setAlmostLetters((prev) => [...prev, letter]);
-    }
-
-    if (currAttempt.letter === 5 && currAttempt.attempt !== 5 && board[currAttempt.attempt+1][0] === "") {
-      setCurrAttempt({ attempt: currAttempt.attempt+1, letter: 0});
     }
   }, [currAttempt.attempt]);
   return (

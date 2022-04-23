@@ -273,7 +273,7 @@ function App() {
   };
 
   const onSelectLetter = (key) => {
-    if (currAttempt.letter > 5) return;
+    if (currAttempt.letter > 4) return;
     const newBoard = [...board];
     
     newBoard[currAttempt.attempt][currAttempt.letter] = key;
@@ -322,7 +322,7 @@ function App() {
         <GameWrapper>
           <Board />
           <Keyboard />
-          {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions}/>}
+          {openInstructions && <InstructionsPopup setOpenInstructions={setOpenInstructions} gameOver={gameOver.gameOver}/>}
           {showInvalid && <InvalidPopup />}
           {openModal && <Modal setOpenModal={setOpenModal} correctWord={correctWord} guessedWord={gameOver.guessedWord} emojiBoard={emojiBoard} setCookie={setCookie} cookies={cookies}/>}
         </GameWrapper>
