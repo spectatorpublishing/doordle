@@ -1,6 +1,9 @@
 # DoorDash Wordle
 
-Inspiration! BTS Wordle spawned from this: https://github.com/cwackerfuss/react-wordle/tree/main/src
+Inspiration: https://github.com/cwackerfuss/react-wordle/tree/main/src
+
+
+This project is owned and protected by the Columbia Daily Spectator. For any inquiries please contact online@columbiapspectator.com. 
 
 ## Available Scripts
 
