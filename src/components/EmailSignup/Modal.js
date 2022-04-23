@@ -348,7 +348,6 @@ const Modal = (props) => {
             <Result>{props.guessedWord ?  `YOU GUESSED TODAY'S DOORDLE! ` : `YOU RAN OUT OF GUESSES... ` }
             {props.guessedWord ?  <span>&#127881;</span> :  <span>&#128532;</span> }
             </Result>
-            <br/>
             <TodaysWord>THE WORD WAS:</TodaysWord>
             <TodaysWordTiles>
                 {
@@ -377,7 +376,7 @@ const Modal = (props) => {
                     </TimerWrap>
                 </Mobile>
             {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE TO GET A FREE MEAL ON US!</Instructions>}
-            {props.guessedWord && !props.cookies.emailSubmitted && <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/>}
+            {(props.guessedWord && !props.cookies.emailSubmitted) ? <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/> : <br/>}
             {errorMsg === "" ? null : <Instructions className="error">{errorMsg}</Instructions>}
             {(props.guessedWord && !props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> : <br/>}
         </Background>
