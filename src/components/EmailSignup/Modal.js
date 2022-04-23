@@ -362,7 +362,7 @@ const Modal = (props) => {
     const isValidEmail = (email) => {
         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (email.match(mailformat)){
-            console.log("Valid email address!");
+            // valid email address
             setErrorMsg("")
             return true;
         } else {

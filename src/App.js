@@ -56,7 +56,6 @@ function App() {
     generateTimedWordSet().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
-      console.log("chosen word: ", words.todaysWord);
 
       initializeGame(words.todaysWord)
     })
@@ -70,9 +69,6 @@ function App() {
 
   // clear any cookies or set game to previous game configuration
   const initializeGame = (todaysWord) => {
-    /* console.log("current cookies:\n")
-    console.log(cookies) */
-
     if (cookies.lastPlayed && !alreadyPlayed(todaysWord)){
       // if not already played with current word, clear cookies
       clearCookies()
@@ -96,9 +92,6 @@ function App() {
     if (cookies.emojiBoard){
       setEmojiBoard(cookies.emojiBoard)
     }
-
-    /* console.log("current cookies:\n")
-    console.log(cookies) */
   }
 
   const alreadyPlayed = (todaysWord) => {
@@ -106,14 +99,12 @@ function App() {
 
     // if last time played is not today, they can play again
     if (cookies.lastPlayed.day !== currentDate.getDate() && cookies.lastPlayed.month !== currentDate.getMonth()){
-      console.log("last time played not today")
       return false;
     }
 
     // if they have already played today, if the current correct word
     // is different that their last correct word, they can play
     if (todaysWord !== cookies.correctWord){
-      console.log("different new word")
       return false;
     }
 
@@ -199,8 +190,7 @@ function App() {
   const updateEmojiBoard = (currWord) => {
     var newEmojiBoard = emojiBoard
     const word = currWord.toUpperCase().split("")
-    console.log(currWord)
-    console.log(word)
+
     for (let j = 0; j <5; j++){
       const correct = correctWord.toUpperCase()[j] === word[j];
 
@@ -231,9 +221,6 @@ function App() {
       currWord += board[currAttempt.attempt][i];
     }
 
-    console.log(board)
-    console.log(currAttempt)
-
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
       setCookie("currAttempt", { attempt: currAttempt.attempt + 1, letter: 0 }, {path: "/"})
@@ -242,9 +229,6 @@ function App() {
       setShowInvalid(true);
       return;
     }
-
-    console.log(board)
-    console.log(currAttempt)
 
     if (currWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });

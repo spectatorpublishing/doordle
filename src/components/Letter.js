@@ -55,9 +55,6 @@ function Letter({ letterPos, attemptVal }) {
   //const [letterState, setLetterState] = useState();
   const correct = correctWord.toUpperCase()[letterPos] === letter;
 
-  //console.log(board)
-  //console.log(currAttempt)
-
   const likely =
     // a letter has been typed and it is not correct but is present somewhere in the correct word
     (!correct && letter !== "" && correctWord.toUpperCase().includes(letter)
