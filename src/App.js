@@ -72,6 +72,8 @@ function App() {
     if (cookies.lastPlayed && !alreadyPlayed(todaysWord)){
       // if not already played with current word, clear cookies
       clearCookies()
+      setOpenInstructions(true)
+      return;
     }
 
     // if any cookies stored, use them to initialize game
