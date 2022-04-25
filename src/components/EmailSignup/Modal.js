@@ -107,7 +107,7 @@ const Instructions = styled.div`
     font-size: 1rem;
     color: ${theme.colors.doordashRed};
     text-align:center;
-    padding: 3rem 2rem 1rem 2rem;
+    padding: 2rem 2rem 1rem 2rem;
     text-transform: uppercase;
 
     &.disclaimer {
@@ -119,6 +119,7 @@ const Instructions = styled.div`
 
     &.error{
         padding: 0rem 2rem 1rem 2rem;
+        font-size: 0.8rem;
     }
 
     @media (max-width: ${theme.sizes.mobile}) {
@@ -129,6 +130,7 @@ const Instructions = styled.div`
 
         &.error{
             padding: 0rem 1rem 1rem 1rem;
+            font-size:0.7rem;
         }
 
         &.disclaimer {
@@ -342,6 +344,7 @@ const Modal = (props) => {
     }
 
     const myRequest = () =>{
+        var status = props.guessedWord ? "winner" : "loser"
         fetch(`https://docs.google.com/forms/d/e/1FAIpQLScR2wa5JWpE6Fnvxkl11XR5fBxfeRxOEzYkhKzwBUnLUUzu6g/formResponse?entry.1079938000=${email}`, {
         method: 'POST',
         mode: 'no-cors',
@@ -425,11 +428,11 @@ const Modal = (props) => {
                         <Time><Countdown/></Time>
                     </TimerWrap>
                 </Mobile>
-            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE to win a free $10 DoorDash gift card daily!</Instructions>}
-            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions className='disclaimer'>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Instructions>}
-            {(props.guessedWord && !props.cookies.emailSubmitted) ? <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/> : <br/>}
+            {!props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE to win a free $10 DoorDash gift card daily!</Instructions>}
+            {!props.cookies.emailSubmitted && <Instructions className='disclaimer'>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Instructions>}
+            {(!props.cookies.emailSubmitted) ? <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/> : <br/>}
             {errorMsg === "" ? null : <Instructions className="error">{errorMsg}</Instructions>}
-            {(props.guessedWord && !props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> : <br/>}
+            {(!props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> : <br/>}
         </Background>
     </div>
   )
