@@ -27,7 +27,7 @@ const Instructions = styled.div`
     text-align:left;
     padding:0.4rem 0.6rem;
     @media (max-height: 900px ) {
-        font-size:1.1rem;
+        font-size:0.95rem;
         padding:0.3rem 1.5rem 0.4rem 1.5rem;
     }
     @media (max-height: 800px) {
@@ -61,7 +61,7 @@ const ExampleText = styled.div`
         padding:1rem;
     }
     @media (max-height: 900px ) {
-        font-size:1.05rem;
+        font-size:0.95rem;
         padding-left:2rem;
         padding-right:2rem;
         padding-bottom:1rem;
