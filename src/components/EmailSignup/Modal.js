@@ -353,7 +353,7 @@ const Modal = (props) => {
         }
         })
         .then(response=> {
-            setErrorMsg("You're all set! Keep an eye on your email to see if you won.")
+            setErrorMsg("You're all set!   Keep an eye on your email to see if you won.")
             props.setCookie("emailSubmitted", true, {path: "/"})
         })  
     }
