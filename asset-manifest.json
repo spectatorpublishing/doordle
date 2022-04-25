@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.34382ae2.css",
-    "main.js": "/static/js/main.971fd53a.js",
-    "static/media/wordle-bank-full.txt": "/static/media/wordle-bank-full.67b2ed5956b17745cbb7.txt",
+    "main.js": "/static/js/main.14152754.js",
+    "static/media/wordle-bank-full.txt": "/static/media/wordle-bank-full.3aa649e841c2a0e67f21.txt",
     "index.html": "/index.html",
-    "static/media/wordle-bank-food-rand.txt": "/static/media/wordle-bank-food-rand.00d0673f2aade0c916ba.txt",
-    "static/media/wordle-bank-food.txt": "/static/media/wordle-bank-food.551ee5e30dbabde911c3.txt",
+    "static/media/wordle-bank-food-rand.txt": "/static/media/wordle-bank-food-rand.03a95e5bba576f7720d7.txt",
+    "static/media/wordle-bank-food.txt": "/static/media/wordle-bank-food.03a95e5bba576f7720d7.txt",
     "main.34382ae2.css.map": "/static/css/main.34382ae2.css.map",
-    "main.971fd53a.js.map": "/static/js/main.971fd53a.js.map"
+    "main.14152754.js.map": "/static/js/main.14152754.js.map"
   },
   "entrypoints": [
     "static/css/main.34382ae2.css",
-    "static/js/main.971fd53a.js"
+    "static/js/main.14152754.js"
   ]
 }
