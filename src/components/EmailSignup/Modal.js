@@ -108,6 +108,14 @@ const Instructions = styled.div`
     color: ${theme.colors.doordashRed};
     text-align:center;
     padding: 3rem 2rem 1rem 2rem;
+    text-transform: uppercase;
+
+    &.disclaimer {
+        color: ${theme.colors.black};
+        text-transform: none;
+        padding: 0.5rem 2rem 1rem 2rem;
+        font-size: 0.8rem;
+    }
 
     &.error{
         padding: 0rem 2rem 1rem 2rem;
@@ -117,11 +125,15 @@ const Instructions = styled.div`
         width:fit-content;
         margin: 0.5rem auto;
         font-size:0.7rem;
-        padding-top:1rem;
-        padding-bottom:1rem;
+        padding: 1rem 1rem 1rem 1rem;
 
         &.error{
-            padding: 0rem 2rem 1rem 2rem;
+            padding: 0rem 1rem 1rem 1rem;
+        }
+
+        &.disclaimer {
+            padding: 0rem 1rem 1rem 1rem;
+            font-size:0.7rem;
         }
     }
 `
@@ -187,7 +199,7 @@ const X = styled.div`
     &.close {
         color: ${theme.colors.black};
         @media (max-width: ${theme.sizes.mobile}) {
-            margin-bottom:1.5rem;
+            margin-bottom:0rem;
             opacity:0.7;
         }
         cursor:pointer;
@@ -413,7 +425,8 @@ const Modal = (props) => {
                         <Time><Countdown/></Time>
                     </TimerWrap>
                 </Mobile>
-            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE TO GET A FREE MEAL ON US!</Instructions>}
+            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE to win a free $10 DoorDash gift card daily!</Instructions>}
+            {props.guessedWord && !props.cookies.emailSubmitted && <Instructions className='disclaimer'>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Instructions>}
             {(props.guessedWord && !props.cookies.emailSubmitted) ? <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/> : <br/>}
             {errorMsg === "" ? null : <Instructions className="error">{errorMsg}</Instructions>}
             {(props.guessedWord && !props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> : <br/>}

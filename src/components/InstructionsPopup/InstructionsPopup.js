@@ -64,6 +64,7 @@ const ExampleText = styled.div`
         font-size:1.05rem;
         padding-left:2rem;
         padding-right:2rem;
+        padding-bottom:1rem;
     }
     @media (max-height: 800px) {
         font-size:0.95rem;
@@ -80,7 +81,12 @@ const ExampleText = styled.div`
         padding-top:1rem;
         padding-bottom:1.2rem;
     }
-    
+
+    &.disclaimer {
+        @media (max-height: 900px ) {
+            padding-top:0rem;
+        }
+    }
 `
 
 const WordTile = styled.span`
@@ -119,7 +125,7 @@ const Background = styled.div`
         margin:auto;
         padding:1.8rem 2rem 2rem 2rem;
         margin-top:1rem; 
-        width:27rem;
+        width:40rem;
         height:fit-content;
         border-radius: 10px; 
     }
@@ -156,6 +162,12 @@ const Color = styled.span`
     text-transform: uppercase;
     font-weight:600;
 `
+
+const Disclaimer = styled.span`
+    color: ${theme.colors.black};
+    font-weight:600;
+`
+
 const Spacing = styled.div`
     padding:5px;
 `
@@ -215,7 +227,8 @@ const InstructionsPopup = (props) => {
             <WordTile color={theme.colors.white} font={"black"}>C</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>T</WordTile><WordTile color={theme.colors.wrong} font={"black"}>E</WordTile><WordTile color={theme.colors.white} font={"black"}>R</WordTile>
             <ExampleText>The letter E is not in the word in any spot.</ExampleText>
 
-            <ExampleText><Bold><Color>Solve the doordle for a chance to receive a free meal on us!</Color></Bold></ExampleText>
+            <ExampleText><Bold><Color>Solve the doordle for a chance to win a free $10 DoorDash gift card daily!</Color></Bold></ExampleText>
+            <ExampleText className='disclaimer'><Disclaimer>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Disclaimer></ExampleText>
             { (!props.gameOver) ? <Button onClick= {() => props.setOpenInstructions(false)}>Play</Button> : null}
         </Background>
     </div>
