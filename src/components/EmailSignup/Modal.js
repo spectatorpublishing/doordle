@@ -345,7 +345,7 @@ const Modal = (props) => {
 
     const myRequest = () =>{
         var status = props.guessedWord ? "winner" : "loser"
-        fetch(`https://docs.google.com/forms/d/e/1FAIpQLScR2wa5JWpE6Fnvxkl11XR5fBxfeRxOEzYkhKzwBUnLUUzu6g/formResponse?entry.1079938000=${email}`, {
+        fetch(`https://docs.google.com/forms/d/e/1FAIpQLScR2wa5JWpE6Fnvxkl11XR5fBxfeRxOEzYkhKzwBUnLUUzu6g/formResponse?entry.1079938000=${email}&entry.349107176=${status}`, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
