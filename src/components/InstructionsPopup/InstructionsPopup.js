@@ -53,9 +53,10 @@ const ExampleText = styled.div`
     font-size: 0.8rem;
     color: black;
     text-align:left;
-    padding:1rem;
+    padding: 1rem;
     text-align:center;
     padding-bottom:1.5rem;
+
     @media (min-width: ${theme.sizes.tablet}) {
         font-size: 0.8rem;
         padding:1rem;
@@ -82,7 +83,17 @@ const ExampleText = styled.div`
         padding-bottom:1.2rem;
     }
 
+    &.solve {
+        padding-bottom: 0rem;
+        text-transform: uppercase;
+
+        @media (max-height: 900px ) {
+            padding-bottom: 1rem;
+        }
+    }
+
     &.disclaimer {
+        color: #B71000;
         @media (max-height: 900px ) {
             padding-top:0rem;
         }
@@ -118,14 +129,14 @@ const Background = styled.div`
     background-color:#E0F2F6;
     width:100%;
     height:100%;
-    padding-top: 1rem;
+    padding-top: 2rem;
     
     @media (min-width: ${theme.sizes.mobile}) {
         display:block;
         margin:auto;
         padding:1.8rem 2rem 2rem 2rem;
-        margin-top:1rem; 
-        width:40rem;
+        margin-top:3rem; 
+        width:30rem;
         height:fit-content;
         border-radius: 10px; 
     }
@@ -158,13 +169,12 @@ const Bold = styled.span`
 `
 
 const Color = styled.span`
-    color: ${theme.colors.doordashRed};
-    text-transform: uppercase;
+    
     font-weight:600;
 `
 
 const Disclaimer = styled.span`
-    color: ${theme.colors.black};
+    color: ${theme.colors.doordashRed};
     font-weight:600;
 `
 
@@ -214,10 +224,12 @@ const InstructionsPopup = (props) => {
             {(!props.gameOver) ? null : <X className="close" onClick= {()=> props.setOpenInstructions(false)}><FontAwesomeIcon icon={faX}/></X>}
             <Logo fontColor={theme.colors.doordashRed}/>
             <Spacing/>
+            <ExampleText className='solve'><Bold><Color>Solve the doordle for a chance to win a free $10 DoorDash gift card daily!</Color></Bold></ExampleText>
+            <ExampleText className='disclaimer'><Disclaimer>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Disclaimer></ExampleText>
+            <Hr/>
             <Instructions>Guess the <Bold>DOORDLE</Bold> in 6 tries.</Instructions>
-            <Instructions>Each guess can be any valid <Bold>5-letter word</Bold>, but keep in mind every correct Doordle is a word related to <Bold>food</Bold>! Hit the enter button to submit.</Instructions>
-            <Instructions>After each guess, the color of the tiles will change to show how close your guess was to the word.</Instructions>
-            <Instructions><Bold>You can play a new Doordle every 12 hours!</Bold></Instructions>
+            <Instructions>Each guess can be any valid <Bold>5-letter word</Bold>, but every correct Doordle is a word related to <Bold>food</Bold></Instructions>
+            <Instructions><Bold>You can play a new Doordle every day!</Bold></Instructions>
             <Hr/>
             <Instructions><Bold>Examples:</Bold></Instructions>
             <WordTile color={theme.colors.correct}>P</WordTile><WordTile color={theme.colors.white} font={"black"}> I </WordTile><WordTile color={theme.colors.white} font={"black"}>Z</WordTile><WordTile color={theme.colors.white} font={"black"}>Z</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile>
@@ -226,9 +238,6 @@ const InstructionsPopup = (props) => {
             <ExampleText>The letter I is in the word but in the wrong spot.</ExampleText>
             <WordTile color={theme.colors.white} font={"black"}>C</WordTile><WordTile color={theme.colors.white} font={"black"}>A</WordTile><WordTile color={theme.colors.white} font={"black"}>T</WordTile><WordTile color={theme.colors.wrong} font={"black"}>E</WordTile><WordTile color={theme.colors.white} font={"black"}>R</WordTile>
             <ExampleText>The letter E is not in the word in any spot.</ExampleText>
-
-            <ExampleText><Bold><Color>Solve the doordle for a chance to win a free $10 DoorDash gift card daily!</Color></Bold></ExampleText>
-            <ExampleText className='disclaimer'><Disclaimer>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Disclaimer></ExampleText>
             { (!props.gameOver) ? <Button onClick= {() => props.setOpenInstructions(false)}>Play</Button> : null}
         </Background>
     </div>
