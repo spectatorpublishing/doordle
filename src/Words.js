@@ -12,7 +12,7 @@ export const boardDefault = [
 ];
 
 // TO DO: before launch, update with date the site goes live
-const LAUNCH_DATE = new Date("April 18, 2022 00:00:00");
+const LAUNCH_DATE = new Date("May 2, 2022 00:00:00");
 
 export const generateWordSet = async () => {
   let wordSet;
@@ -43,7 +43,7 @@ export const generateTimedWordSet = async () => {
     .then((result) => {
       const guessWordsArr = result.split("\n");
       let todaysDate = new Date();
-      let halfDaysElapsed = (todaysDate.getTime() - LAUNCH_DATE.getTime()) / (1000 * 60 * 60 * 12)
+      let halfDaysElapsed = (todaysDate.getTime() - LAUNCH_DATE.getTime()) / (1000 * 60 * 60 * 24)
       todaysWord = guessWordsArr[Math.floor(halfDaysElapsed)];
     });
   return { wordSet, todaysWord };
