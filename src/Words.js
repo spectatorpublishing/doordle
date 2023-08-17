@@ -12,7 +12,7 @@ export const boardDefault = [
 ];
 
 // TO DO: before launch, update with date the site goes live
-const LAUNCH_DATE = new Date("October 1, 2022 00:00:00");
+const LAUNCH_DATE = new Date("August 1, 2023 00:00:00");
 
 export const generateWordSet = async () => {
   let wordSet;
