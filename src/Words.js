@@ -1,5 +1,4 @@
 import wordBank from "./wordle-bank-full.txt";
-import foodWordBank from "./wordle-bank-food.txt";
 import foodWordBankRand from "./wordle-bank-food-rand.txt";
 
 export const boardDefault = [
@@ -12,7 +11,7 @@ export const boardDefault = [
 ];
 
 // TO DO: before launch, update with date the site goes live
-const LAUNCH_DATE = new Date("October 30, 2024 00:00:00");
+const LAUNCH_DATE = new Date("August 1, 2023 00:00:00");
 
 export const generateWordSet = async () => {
   let wordSet;
@@ -44,7 +43,7 @@ export const generateTimedWordSet = async () => {
       const guessWordsArr = result.split("\n");
       let todaysDate = new Date();
       let halfDaysElapsed = (todaysDate.getTime() - LAUNCH_DATE.getTime()) / (1000 * 60 * 60 * 24)
-      todaysWord = guessWordsArr[Math.floor(halfDaysElapsed)];
+      todaysWord = guessWordsArr[Math.floor(halfDaysElapsed) % guessWordsArr.length];
     });
   return { wordSet, todaysWord };
 };
