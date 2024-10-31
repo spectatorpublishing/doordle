@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../App";
 import styled from 'styled-components'
 import theme from "../theme";
-import GameOver from "./GameOver";
 
 const LetterWrapper = styled.div`
   flex: 1;
@@ -49,7 +48,7 @@ const LetterWrapper = styled.div`
 `
 
 function Letter({ letterPos, attemptVal }) {
-  const { board, setDisabledLetters, setCorrectLetters, setAlmostLetters, currAttempt, setCurrAttempt, correctWord, getIndices, checkLikely, gameOver } =
+  const { board, setDisabledLetters, setCorrectLetters, setAlmostLetters, currAttempt, correctWord, checkLikely, gameOver } =
     useContext(AppContext);
   const letter = board[attemptVal][letterPos];
   //const [letterState, setLetterState] = useState();
@@ -76,7 +75,7 @@ function Letter({ letterPos, attemptVal }) {
     else if (letter !== "" && likely) {
       setAlmostLetters((prev) => [...prev, letter]);
     }
-  }, [currAttempt.attempt]);
+  }, [currAttempt.attempt]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <LetterWrapper className={letterState}>
       {letter}

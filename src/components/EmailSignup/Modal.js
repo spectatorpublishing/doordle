@@ -2,11 +2,10 @@ import React from 'react'
 import styled from 'styled-components/macro';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShare, faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
+import { faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
 import Countdown from '../Countdown';
 import { useState, useEffect } from 'react';
 import Logo from '../Logo';
-import { Cookies } from 'react-cookie';
 
 
 const OVERLAY_STYLES = {
@@ -54,9 +53,9 @@ const WordTile = styled.span`
 const Background = styled.div`
     background-color:#E0F2F6;
     margin:auto;
-    padding:1.8rem 2rem 1rem 2rem;
+    padding:1.8rem 2rem 1.8rem 2rem;
     margin-top:1rem; 
-    width:27rem;
+    width: 25rem;
     border-radius: 10px;
 
     @media (max-width: ${theme.sizes.mobile}) {
@@ -276,21 +275,15 @@ const Mobile = styled.div`
 `;
 
 const Desktop = styled.div`
-@media (max-width: ${theme.sizes.mobile}) {
-    display: none;
-}
-
+    @media (max-width: ${theme.sizes.mobile}) {
+        display: none;
+    }
 `
-
-
 
 const Modal = (props) => {
     const [showCopied, setShowCopied] = useState(false)
     const [email, setEmail] = useState("");
     const [errorMsg, setErrorMsg] = useState("")
-    const gameLogo = "https://doordle.s3.amazonaws.com/logo.png"
-    const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
-    const companyURL = "https://www.doordash.com/"
 
     const copyToClipboard = () => {
         var guesses = props.guessedWord ? props.emojiBoard.split("\n").length - 1 : "X"
@@ -428,11 +421,11 @@ const Modal = (props) => {
                         <Time><Countdown/></Time>
                     </TimerWrap>
                 </Mobile>
-            {!props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE to win a free $10 DoorDash gift card daily!</Instructions>}
+            {/* {!props.cookies.emailSubmitted && <Instructions>ENTER YOUR EMAIL FOR A CHANCE to win a free $10 DoorDash gift card daily!</Instructions>}
             {!props.cookies.emailSubmitted && <Instructions className='disclaimer'>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Instructions>}
             {(!props.cookies.emailSubmitted) ? <Input name='email' alt="email" type="email" value={email} onChange={e => setEmail(e.target.value)} onSubmit={() => handleSubmit(email)}/> : <br/>}
             {errorMsg === "" ? null : <Instructions className="error">{errorMsg}</Instructions>}
-            {(!props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> : <br/>}
+            {(!props.cookies.emailSubmitted) ? <Button className="submit" onClick= {() => handleSubmit(email)}>Submit</Button> : <br/>} */}
         </Background>
     </div>
   )

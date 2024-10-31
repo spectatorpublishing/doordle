@@ -2,11 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShare, faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
-import Countdown from '../Countdown';
-import { useState, useEffect } from 'react';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../Logo';
-import { ThemeConsumer } from 'styled-components';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -108,7 +105,7 @@ const WordTile = styled.span`
     margin: 0.1rem;
     border:none;
     font-weight:600;
-    color: ${props=> props.font=="black" ? "black" : "white"};
+    color: ${props => props.font === "black" ? "black" : "white"};
     font-size:1.2rem;
     @media (max-height: 900px ) {
         font-size:1rem;
@@ -215,18 +212,12 @@ const Button = styled.button`
 
 
 const InstructionsPopup = (props) => {
-    const companyLogo = "https://doordle.s3.amazonaws.com/doordash.png"
-    const companyURL = "https://www.doordash.com/"
-
   return(
     <div style={OVERLAY_STYLES}>
         <Background>
             {(!props.gameOver) ? null : <X className="close" onClick= {()=> props.setOpenInstructions(false)}><FontAwesomeIcon icon={faX}/></X>}
             <Logo fontColor={theme.colors.doordashRed}/>
             <Spacing/>
-            <ExampleText className='solve'><Bold><Color>Solve the doordle for a chance to win a free $10 DoorDash gift card daily!</Color></Bold></ExampleText>
-            <ExampleText className='disclaimer'><Disclaimer>Sign up for DoorDash with your ".edu" email or change your email to your ".edu" to qualify.</Disclaimer></ExampleText>
-            <Hr/>
             <Instructions>Guess the <Bold>DOORDLE</Bold> in 6 tries.</Instructions>
             <Instructions>Each guess can be any valid <Bold>5-letter word</Bold>, but every correct Doordle is a word related to <Bold>food</Bold></Instructions>
             <Instructions><Bold>You can play a new Doordle every day!</Bold></Instructions>

@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { AppContext } from "../App";
+import React from "react";
 import Letter from "./Letter";
 import styled from 'styled-components/macro'
 

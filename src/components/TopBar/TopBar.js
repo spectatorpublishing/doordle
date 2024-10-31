@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 import theme from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartSimple, faQuestion, faX, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple, faQuestion, faX } from '@fortawesome/free-solid-svg-icons';
 import CDSShareButton from './CDSShareButton';
 import Logo from '../Logo';
 
@@ -170,17 +170,16 @@ const TopBar = (props) => {
     const websiteURL = "https://doordash.columbiaspectator.com"
     const companyURL = "https://www.doordash.com/"
     const headline = "DoordleDash"
-    const gameLogo = "https://doordle.s3.amazonaws.com/logo.png"
     
     return (
         <Wrapper>
                 <Logos>
                     <a href="https://www.columbiaspectator.com/">
-                        <CDSLogo><img src="https://doordle.s3.amazonaws.com/whitecrown.png"/></CDSLogo>
+                        <CDSLogo><img src="https://doordle.s3.amazonaws.com/whitecrown.png" alt="Columbia Spectator Crown Logo"/></CDSLogo>
                     </a>
                     <X><FontAwesomeIcon icon={faX}/></X>
                     <a href={companyURL}>
-                        <CompanyLogo><img src={companyLogo}/></CompanyLogo>
+                        <CompanyLogo><img src={companyLogo} alt="Doordash Logo"/></CompanyLogo>
                     </a>
                 </Logos>
                 <MoreInfoIcon onClick={() => props.setOpenInstructions(true)}><FontAwesomeIcon icon={faQuestion}/></MoreInfoIcon>

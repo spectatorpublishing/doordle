@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useContext } from "react";
 import Key from "./Key";
 import { AppContext } from "../App";
 import styled from 'styled-components'
-import theme from "../theme";
 
 const KeyboardWrapper = styled.div`
   margin: 1.3rem 0rem 2rem 0rem; 
@@ -42,7 +41,6 @@ function Keyboard() {
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
   const {
-    board,
     disabledLetters,
     correctLetters,
     almostLetters,

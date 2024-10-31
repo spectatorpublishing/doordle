@@ -3,9 +3,8 @@ import React, { useState, createContext, useEffect } from "react";
 import styled from 'styled-components';
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
-import { boardDefault, generateTimedWordSet, generateWordSet } from "./Words";
+import { boardDefault, generateTimedWordSet } from "./Words";
 import Modal from "./components/EmailSignup/Modal.js"
-import GameOver from "./components/GameOver";
 import TopBar from "./components/TopBar/TopBar";
 import InstructionsPopup from "./components/InstructionsPopup/InstructionsPopup";
 import InvalidPopup from "./components/InvalidPopup/InvalidPopup";

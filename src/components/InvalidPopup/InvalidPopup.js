@@ -1,11 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro';
 import theme from '../../theme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShare, faShareNodes, faX } from '@fortawesome/free-solid-svg-icons';
-import Countdown from '../Countdown';
-import { useState, useEffect } from 'react';
-import Logo from '../Logo';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
